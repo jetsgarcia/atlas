@@ -1,4 +1,5 @@
 import PageTitle from "@/components/admin/page-title";
+import UsersDialogButton from "./_components/users-dialog-button";
 
 export default function ManageUsersPage() {
   return (
@@ -6,6 +7,7 @@ export default function ManageUsersPage() {
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <PageTitle title="Users Management" />
+          <UsersDialogButton />
         </div>
       </div>
     </div>
