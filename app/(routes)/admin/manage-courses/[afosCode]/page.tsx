@@ -146,9 +146,9 @@ export default function ManageModulesAndSubjectsPage({
                         {subjects
                           .filter(
                             (subject) => subject.module_id === module.module_id
-                          ) // Filter subjects for the current module
+                          )
                           .map((subject) => {
-                            const key = `${module.module_id}-${subject.subject_code}`; // Generate a unique key
+                            const key = `${module.module_id}-${subject.subject_code}`;
                             return (
                               <TableRow key={key}>
                                 <TableCell>{subject.subject_code}</TableCell>
