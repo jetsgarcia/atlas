@@ -52,7 +52,7 @@ export default function ManageCoursesPage() {
     <div className="py-10 max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
-          <PageTitle title="AFOS &#40;Armed Forces Occupational Specialty&#41;" />
+          <PageTitle title="Courses Management" />
           <AFOSDialogButton />
         </div>
         {isLoading ? (
@@ -64,7 +64,7 @@ export default function ManageCoursesPage() {
             ) : (
               <div className="grid gap-2">
                 <h3 className="text-lg font-semibold text-green-800">
-                  AFOS List
+                  AFOS &#40;Armed Forces Occupational Specialty&#41; List
                 </h3>
                 <Table className="border">
                   <TableHeader>
