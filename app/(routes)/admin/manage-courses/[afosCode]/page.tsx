@@ -1,6 +1,6 @@
 "use client";
 
-import PageTitle from "@/components/admin/page-title";
+import PageTitle from "@/components/page-title";
 import ModulesAndSubjectsDialogButton from "./_components/modules-and-subjects-dialog-button";
 import ReadModules from "@/actions/admin/read-module";
 import ReadSubjects from "@/actions/admin/read-subject";
@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Pencil, Trash } from "lucide-react";
-import Loader from "@/components/admin/loader";
-import EmptyPlaceholder from "@/components/admin/empty-placeholder";
+import Loader from "@/components/loader";
+import EmptyPlaceholder from "@/components/empty-placeholder";
 import Link from "next/link";
 
 interface Modules {
