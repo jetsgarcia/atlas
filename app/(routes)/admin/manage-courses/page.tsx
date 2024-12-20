@@ -35,12 +35,10 @@ export default function ManageCoursesPage() {
         if (success) {
           setAFOS(data as Array<AFOS>);
         } else {
-          console.log(message || "An error occurred");
+          alert(message || "An error occurred");
         }
       } catch (error: unknown) {
-        console.log(
-          error instanceof Error ? error.message : "An error occurred"
-        );
+        alert(error instanceof Error ? error.message : "An error occurred");
       } finally {
         setIsLoading(false);
       }

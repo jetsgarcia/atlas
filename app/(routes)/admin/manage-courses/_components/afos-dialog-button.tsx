@@ -1,5 +1,6 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
   DialogContent,
@@ -25,6 +26,7 @@ import CreateAFOS from "@/actions/admin/create-afos";
 type AFOSLevel = "Basic" | "Advanced";
 
 export default function AFOSDialogButton() {
+  const { toast } = useToast();
   const [afosLevel, setAfosLevel] = useState<AFOSLevel>("Basic");
   const [afosName, setAfosName] = useState("");
   const [afosCode, setAfosCode] = useState("");
@@ -43,17 +45,22 @@ export default function AFOSDialogButton() {
       setIsSubmitting(false);
       if (response.success) {
         setIsDialogOpen(false);
-        alert(response.message);
+        toast({
+          description: response.message,
+        });
+
+        // Reset form
+        setAfosLevel("Basic");
+        setAfosName("");
+        setAfosCode("");
+        setIsDialogOpen(false);
       } else {
-        alert(response.message);
+        toast({
+          variant: "destructive",
+          description: response.message,
+        });
       }
     });
-
-    // Reset form
-    setAfosLevel("Basic");
-    setAfosName("");
-    setAfosCode("");
-    setIsDialogOpen(false);
   }
 
   return (
@@ -140,7 +147,7 @@ export default function AFOSDialogButton() {
               id="code"
               className="col-span-3"
               maxLength={5}
-              onChange={(e) => setAfosCode(e.target.value)}
+              onChange={(e) => setAfosCode(e.target.value.toUpperCase())}
               value={afosCode}
             />
           </div>
