@@ -29,21 +29,23 @@ export default function ManageCoursesPage() {
   const [afos, setAFOS] = useState<AFOS[]>([]);
 
   useEffect(() => {
-    async function fetchAFOSData() {
+    async function fetchModulesData() {
       try {
         const { success, data, message } = await ReadAllAFOS();
         if (success) {
           setAFOS(data as Array<AFOS>);
         } else {
-          alert(message || "An error occurred");
+          console.log(message || "An error occurred");
         }
       } catch (error: unknown) {
-        alert(error instanceof Error ? error.message : "An error occurred");
+        console.log(
+          error instanceof Error ? error.message : "An error occurred"
+        );
       } finally {
         setIsLoading(false);
       }
     }
-    fetchAFOSData();
+    fetchModulesData();
   }, []);
 
   return (
