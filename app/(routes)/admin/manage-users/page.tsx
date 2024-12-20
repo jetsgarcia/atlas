@@ -1,9 +1,9 @@
 import ReadAllUsers from "@/actions/admin/read-users";
 import { User, columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
-import PageTitle from "@/components/admin/page-title";
+import PageTitle from "@/components/page-title";
 import UsersDialogButton from "./_components/users-dialog-button";
-import EmptyPlaceholder from "@/components/admin/empty-placeholder";
+import EmptyPlaceholder from "@/components/empty-placeholder";
 
 async function getData(): Promise<User[]> {
   try {

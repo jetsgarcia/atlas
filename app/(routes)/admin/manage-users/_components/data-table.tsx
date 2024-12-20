@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import EmptyPlaceholder from "@/components/admin/empty-placeholder";
+import EmptyPlaceholder from "@/components/empty-placeholder";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

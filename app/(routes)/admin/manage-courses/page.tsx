@@ -1,6 +1,6 @@
 "use client";
 
-import PageTitle from "@/components/admin/page-title";
+import PageTitle from "@/components/page-title";
 import AFOSDialogButton from "./_components/afos-dialog-button";
 import { useEffect, useState } from "react";
 import ReadAllAFOS from "@/actions/admin/read-afos";
@@ -15,8 +15,8 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
-import Loader from "@/components/admin/loader";
-import EmptyPlaceholder from "@/components/admin/empty-placeholder";
+import Loader from "@/components/loader";
+import EmptyPlaceholder from "@/components/empty-placeholder";
 
 interface AFOS {
   afos_code: string;
@@ -29,7 +29,7 @@ export default function ManageCoursesPage() {
   const [afos, setAFOS] = useState<AFOS[]>([]);
 
   useEffect(() => {
-    async function fetchAFOSData() {
+    async function fetchModulesData() {
       try {
         const { success, data, message } = await ReadAllAFOS();
         if (success) {
@@ -45,14 +45,14 @@ export default function ManageCoursesPage() {
         setIsLoading(false);
       }
     }
-    fetchAFOSData();
+    fetchModulesData();
   }, []);
 
   return (
     <div className="py-10 max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
-          <PageTitle title="AFOS &#40;Armed Forces Occupational Specialty&#41;" />
+          <PageTitle title="Courses Management" />
           <AFOSDialogButton />
         </div>
         {isLoading ? (
@@ -64,7 +64,7 @@ export default function ManageCoursesPage() {
             ) : (
               <div className="grid gap-2">
                 <h3 className="text-lg font-semibold text-green-800">
-                  AFOS List
+                  AFOS &#40;Armed Forces Occupational Specialty&#41; List
                 </h3>
                 <Table className="border">
                   <TableHeader>

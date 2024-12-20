@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 export type User = {
   user_id: number;
@@ -25,6 +26,16 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "user_id",
     header: "User ID",
+    cell: ({ row }) => {
+      return (
+        <Link
+          className="font-medium text-blue-600 underline"
+          href={`/admin/manage-users/${row.original.user_id}`}
+        >
+          {row.original.user_id}
+        </Link>
+      );
+    },
   },
   {
     accessorKey: "last_name",

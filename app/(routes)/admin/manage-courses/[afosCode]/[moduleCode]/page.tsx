@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/page-title";
-import ReadModules from "@/actions/admin/read-module";
+import ReadSubjects from "@/actions/admin/read-subject";
 import { useEffect, useState } from "react";
 import {
   Table,
@@ -16,31 +16,30 @@ import { ChevronLeft, Pencil, Trash } from "lucide-react";
 import Loader from "@/components/loader";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import Link from "next/link";
-import ModulesDialogButton from "./_components/modules-dialog-button";
+import SubjectsDialogButton from "./_components/subjects-dialog-button";
 
-interface Modules {
+interface Subjects {
+  subject_code: string;
+  subject: string;
   module_id: number;
-  module_number: number;
-  module: string;
-  afos_code: string;
 }
 
-export default function ManageModulesPage({
+export default function ManageSubjectsPage({
   params,
 }: {
-  params: { afosCode: string };
+  params: { moduleCode: number; afosCode: string };
 }) {
+  const [subjects, setSubjects] = useState<Subjects[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [modules, setModules] = useState<Modules[]>([]);
 
   useEffect(() => {
-    async function fetchModulesData() {
+    async function fetchSubjectsData() {
       try {
-        const { success, data, message } = await ReadModules({
-          afos_code: params.afosCode,
+        const { success, data, message } = await ReadSubjects({
+          module_id: params.moduleCode,
         });
         if (success) {
-          setModules(data as Array<Modules>);
+          setSubjects(data as Array<Subjects>);
         } else {
           console.log(message || "An error occurred");
         }
@@ -53,59 +52,49 @@ export default function ManageModulesPage({
       }
     }
 
-    fetchModulesData();
-  }, [params.afosCode]);
+    fetchSubjectsData();
+  }, [params.moduleCode]);
 
   return (
     <div className="py-10 max-w-[80rem] mx-10 xl:mx-auto">
-      <div className="grid gap-4">
+      <div className="grid gap-6">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <Link
-              href="/admin/manage-courses"
+              href={`/admin/manage-courses/${params.afosCode}`}
               className="transition-all ease-in-out hover:text-green-900"
             >
               <ChevronLeft />
             </Link>
-            <PageTitle title={`Modules for ${params.afosCode}`} />
+            <PageTitle title={`Subjects`} />
           </div>
-          <ModulesDialogButton
-            afosCode={params.afosCode}
-            moduleLength={modules.length}
-          />
+          <SubjectsDialogButton moduleId={params.moduleCode} />
         </div>
         {isLoading ? (
           <Loader />
         ) : (
           <>
-            {modules.length === 0 ? (
+            {subjects.length === 0 ? (
               <EmptyPlaceholder />
             ) : (
               <div className="grid gap-2">
                 <h3 className="text-lg font-semibold text-green-800">
-                  Modules List
+                  Subjects List
                 </h3>
                 <Table className="border">
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-[140px]">Module number</TableHead>
+                      <TableHead className="w-[140px]">Subject code</TableHead>
                       <TableHead>Name</TableHead>
                       <TableHead className="w-[40px]"></TableHead>
                       <TableHead className="w-[40px]"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {modules.map((record) => (
-                      <TableRow key={record.module_id}>
-                        <TableCell>
-                          <Link
-                            className="font-medium text-blue-600 underline"
-                            href={`/admin/manage-courses/${record.afos_code}/${record.module_id}`}
-                          >
-                            Module {record.module_number}
-                          </Link>
-                        </TableCell>
-                        <TableCell>{record.module}</TableCell>
+                    {subjects.map((record) => (
+                      <TableRow key={record.subject_code}>
+                        <TableCell>{record.subject_code}</TableCell>
+                        <TableCell>{record.subject}</TableCell>
                         <TableCell>
                           <Button variant="ghost">
                             <Pencil size={16} />
