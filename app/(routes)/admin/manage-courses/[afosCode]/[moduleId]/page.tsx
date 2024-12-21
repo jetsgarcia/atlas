@@ -21,6 +21,7 @@ import SubjectsDialogButton from "./_components/subjects-dialog-button";
 interface Subjects {
   subject_code: string;
   subject: string;
+  instructor: number;
   module_id: number;
 }
 
@@ -85,6 +86,7 @@ export default function ManageSubjectsPage({
                   <TableHeader>
                     <TableRow>
                       <TableHead className="w-[140px]">Subject code</TableHead>
+                      <TableHead className="w-[140px]">Instructor ID</TableHead>
                       <TableHead>Name</TableHead>
                       <TableHead className="w-[40px]"></TableHead>
                       <TableHead className="w-[40px]"></TableHead>
@@ -94,6 +96,14 @@ export default function ManageSubjectsPage({
                     {subjects.map((record) => (
                       <TableRow key={record.subject_code}>
                         <TableCell>{record.subject_code}</TableCell>
+                        <TableCell className="underline">
+                          <Link
+                            className="font-medium text-blue-600 underline"
+                            href={`/admin/manage-users/${record.instructor}`}
+                          >
+                            {record.instructor}
+                          </Link>
+                        </TableCell>
                         <TableCell>{record.subject}</TableCell>
                         <TableCell>
                           <Button variant="ghost">
