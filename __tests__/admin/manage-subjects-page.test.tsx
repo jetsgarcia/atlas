@@ -1,12 +1,13 @@
 import { expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import ManageModulesAndSubjectsPage from "@/app/(routes)/admin/manage-courses/[afosCode]/page";
+import ManageSubjectsPage from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/page";
 
 test("Page", () => {
   render(
-    <ManageModulesAndSubjectsPage
+    <ManageSubjectsPage
       params={{
-        afosCode: "AAAAA",
+        moduleId: 1,
+        afosCode: "BINFN",
       }}
     />
   );

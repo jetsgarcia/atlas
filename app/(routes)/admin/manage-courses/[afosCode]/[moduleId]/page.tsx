@@ -27,7 +27,7 @@ interface Subjects {
 export default function ManageSubjectsPage({
   params,
 }: {
-  params: { moduleCode: number; afosCode: string };
+  params: { moduleId: number; afosCode: string };
 }) {
   const [subjects, setSubjects] = useState<Subjects[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ export default function ManageSubjectsPage({
     async function fetchSubjectsData() {
       try {
         const { success, data, message } = await ReadSubjects({
-          module_id: params.moduleCode,
+          module_id: params.moduleId,
         });
         if (success) {
           setSubjects(data as Array<Subjects>);
@@ -53,10 +53,10 @@ export default function ManageSubjectsPage({
     }
 
     fetchSubjectsData();
-  }, [params.moduleCode]);
+  }, [params.moduleId]);
 
   return (
-    <div className="py-10 max-w-[80rem] mx-10 xl:mx-auto">
+    <div className="py-5 max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-6">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
@@ -68,7 +68,7 @@ export default function ManageSubjectsPage({
             </Link>
             <PageTitle title={`Subjects`} />
           </div>
-          <SubjectsDialogButton moduleId={params.moduleCode} />
+          <SubjectsDialogButton moduleId={params.moduleId} />
         </div>
         {isLoading ? (
           <Loader />
