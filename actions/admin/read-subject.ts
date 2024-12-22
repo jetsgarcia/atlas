@@ -2,11 +2,7 @@
 
 import { getDatabaseConnection } from "@/lib/db";
 
-export default async function ReadSubjects({
-  module_id,
-}: {
-  module_id: number;
-}) {
+export async function ReadSubjects({ module_id }: { module_id: number }) {
   const sql = getDatabaseConnection();
 
   try {

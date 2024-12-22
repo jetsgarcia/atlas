@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/page-title";
-import ReadModules from "@/actions/admin/read-module";
+import { ReadModules } from "@/actions/admin/read-module";
 import { useEffect, useState } from "react";
 import {
   Table,

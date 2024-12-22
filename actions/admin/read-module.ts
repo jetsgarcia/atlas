@@ -2,11 +2,7 @@
 
 import { getDatabaseConnection } from "@/lib/db";
 
-export default async function ReadModules({
-  afos_code,
-}: {
-  afos_code: string;
-}) {
+export async function ReadModules({ afos_code }: { afos_code: string }) {
   const sql = getDatabaseConnection();
 
   try {

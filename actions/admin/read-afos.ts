@@ -2,7 +2,7 @@
 
 import { getDatabaseConnection } from "@/lib/db";
 
-export default async function ReadAllAFOS() {
+export async function ReadAllAFOS() {
   const sql = getDatabaseConnection();
 
   try {

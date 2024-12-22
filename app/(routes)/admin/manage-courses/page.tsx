@@ -3,7 +3,7 @@
 import PageTitle from "@/components/page-title";
 import AFOSDialogButton from "./_components/afos-dialog-button";
 import { useEffect, useState } from "react";
-import ReadAllAFOS from "@/actions/admin/read-afos";
+import { ReadAllAFOS } from "@/actions/admin/read-afos";
 import {
   Table,
   TableBody,
