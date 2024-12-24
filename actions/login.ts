@@ -45,6 +45,11 @@ export async function login({
         maxAge: 60 * 60 * 24,
       });
 
+      (await cookies()).set("userId", user[0].user_id, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24,
+      });
+
       return {
         success: true,
         data: user,

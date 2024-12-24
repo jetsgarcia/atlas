@@ -12,6 +12,12 @@ export async function logout() {
     maxAge: 0,
   });
 
+  // Remove the userId cookie by setting it with a maxAge of 0
+  (await cookies()).set("userId", "", {
+    httpOnly: true,
+    maxAge: 0,
+  });
+
   return {
     success: true,
     message: "Logged out successfully",
