@@ -55,7 +55,7 @@ export default function ManageVideosPage({
       <h1 className="text-2xl font-bold">Upload Video</h1>
       <div className="">
         <Label htmlFor="file">File</Label>
-        <Input id="file" name="file" type="file" required />
+        <Input id="file" name="file" type="file" accept="video/*" required />
       </div>
       <div>
         <Label htmlFor="title">Title</Label>
