@@ -16,13 +16,13 @@ export default function ManageVideosPage({
     const description = data.get("description") as string | null;
 
     if (!title || !description) {
-      return { error: "Title or description is missing" };
+      throw new Error("Title or description is missing");
     }
 
     const file: File | null = data.get("file") as unknown as File;
 
     if (!file) {
-      return { error: "No file selected" };
+      throw new Error("No file selected");
     }
 
     try {
@@ -38,20 +38,21 @@ export default function ManageVideosPage({
       });
 
       if (!response.success) {
-        return { error: "Failed to upload video" };
+        throw new Error("Failed to upload video");
       }
 
-      return { message: "Video uploaded successfully!" };
+      throw new Error("Video uploaded successfully!");
     } catch (error) {
-      return {
-        error:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      };
+      console.log(error);
+      throw new Error("An unknown error occurred");
     }
   }
 
   return (
-    <form action={upload} className="max-w-[40rem] m-auto grid gap-4">
+    <form
+      onSubmit={async () => upload}
+      className="max-w-[40rem] m-auto grid gap-4"
+    >
       <h1 className="text-2xl font-bold">Upload Video</h1>
       <div className="">
         <Label htmlFor="file">File</Label>
