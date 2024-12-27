@@ -29,7 +29,7 @@ export default function ManageCoursesPage() {
   const [afos, setAFOS] = useState<AFOS[]>([]);
 
   useEffect(() => {
-    async function fetchModulesData() {
+    async function fetchAllAFOS() {
       try {
         const { success, data, message } = await ReadAllAFOS();
         if (success) {
@@ -45,7 +45,7 @@ export default function ManageCoursesPage() {
         setIsLoading(false);
       }
     }
-    fetchModulesData();
+    fetchAllAFOS();
   }, []);
 
   return (

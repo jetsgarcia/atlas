@@ -18,7 +18,7 @@ import EmptyPlaceholder from "@/components/empty-placeholder";
 import Link from "next/link";
 import SubjectsDialogButton from "./_components/subjects-dialog-button";
 
-interface Subjects {
+interface Subject {
   subject_code: string;
   subject: string;
   instructor: number;
@@ -30,17 +30,17 @@ export default function ManageSubjectsPage({
 }: {
   params: { moduleId: number; afosCode: string };
 }) {
-  const [subjects, setSubjects] = useState<Subjects[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchSubjectsData() {
+    async function fetchSubjects() {
       try {
         const { success, data, message } = await ReadSubjects({
           module_id: params.moduleId,
         });
         if (success) {
-          setSubjects(data as Array<Subjects>);
+          setSubjects(data as Array<Subject>);
         } else {
           console.log(message || "An error occurred");
         }
@@ -53,7 +53,7 @@ export default function ManageSubjectsPage({
       }
     }
 
-    fetchSubjectsData();
+    fetchSubjects();
   }, [params.moduleId]);
 
   return (

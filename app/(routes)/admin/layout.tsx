@@ -3,13 +3,9 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import AppHeader from "@/components/app-header";
 import { AppSidebar } from "@/components/app-sidebar";
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   // Persist the sidebar state across page reloads and server-side rendering
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
 
   return (

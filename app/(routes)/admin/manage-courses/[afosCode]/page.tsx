@@ -18,7 +18,7 @@ import EmptyPlaceholder from "@/components/empty-placeholder";
 import Link from "next/link";
 import ModulesDialogButton from "./_components/modules-dialog-button";
 
-interface Modules {
+interface Module {
   module_id: number;
   module_number: number;
   module: string;
@@ -31,16 +31,16 @@ export default function ManageModulesPage({
   params: { afosCode: string };
 }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [modules, setModules] = useState<Modules[]>([]);
+  const [modules, setModules] = useState<Module[]>([]);
 
   useEffect(() => {
-    async function fetchModulesData() {
+    async function fetchModules() {
       try {
         const { success, data, message } = await ReadModules({
           afos_code: params.afosCode,
         });
         if (success) {
-          setModules(data as Array<Modules>);
+          setModules(data as Array<Module>);
         } else {
           console.log(message || "An error occurred");
         }
@@ -53,7 +53,7 @@ export default function ManageModulesPage({
       }
     }
 
-    fetchModulesData();
+    fetchModules();
   }, [params.afosCode]);
 
   return (
