@@ -5,28 +5,34 @@ import SubmitButton from "./_components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import Loader from "@/components/loader";
 
 export default function ManageVideosPage({
   params,
 }: {
   params: { subjectCode: string };
 }) {
-  return (
+  const [loading, setLoading] = useState(false);
+
+  return loading ? (
+    <Loader />
+  ) : (
     <form
       onSubmit={async (e) => {
+        setLoading(true);
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const result = await upload(formData, params.subjectCode);
         if (result.error) {
-          alert(result.error);
-        } else {
-          alert(result.message);
+          console.log(result.error);
         }
+        setLoading(false);
       }}
       className="max-w-[40rem] m-auto grid gap-4"
     >
       <h1 className="text-2xl font-bold">Upload Video</h1>
-      <div className="">
+      <div>
         <Label htmlFor="file">File</Label>
         <Input id="file" name="file" type="file" accept="video/*" required />
       </div>
