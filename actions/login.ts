@@ -34,6 +34,12 @@ export async function login({
 
       if (userType === "Student") {
         redirectURL = "/student/dashboard";
+        const afosDesignation =
+          await sql`SELECT * FROM Students WHERE user_id = ${user[0].user_id}`;
+        (await cookies()).set("afosDesignation", afosDesignation[0].afos_code, {
+          httpOnly: true,
+          maxAge: 60 * 60 * 24,
+        });
       } else if (userType === "Instructor") {
         redirectURL = "/instructor/dashboard";
       } else if (userType === "Admin") {

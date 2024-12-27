@@ -4,7 +4,6 @@ import {
   Info,
   User,
   Pencil,
-  Folder,
   ChartNoAxesColumn,
 } from "lucide-react";
 import {
@@ -46,15 +45,6 @@ const adminAdministration = [
 ];
 
 // ================================== Student Sidebar ==================================
-// Menu items for home
-const studentHome = [
-  {
-    title: "Dashboard",
-    url: "/student/dashboard",
-    icon: LayoutDashboard,
-  },
-];
-
 // Menu items for academics
 const studentAcademics = [
   {
@@ -66,11 +56,6 @@ const studentAcademics = [
     title: "Assessments",
     url: "/student/assessments",
     icon: Pencil,
-  },
-  {
-    title: "Learning Resources",
-    url: "/student/learning-resources",
-    icon: Folder,
   },
 ];
 
@@ -119,23 +104,6 @@ function StudentSidebar() {
         <AppLogoHeader />
       </SidebarHeader>
       <SidebarContent className="px-2 bg-darkGreen-500 text-white">
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-400">Home</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {studentHome.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel className="text-gray-400">
             Academics
