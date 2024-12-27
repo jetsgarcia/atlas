@@ -1,34 +1,34 @@
 "use client";
 
-import { ReadModules } from "@/actions/admin/read-module";
-import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
-import Link from "next/link";
+import { ReadSubjects } from "@/actions/admin/read-subject";
 import { useEffect, useState } from "react";
+import Loader from "@/components/loader";
+import Link from "next/link";
 
-interface Modules {
+interface Subjects {
+  subject_code: string;
+  subject: string;
+  instructor: number;
   module_id: number;
-  module_number: number;
-  module: string;
-  afos_code: string;
 }
 
-export default function SubjectsList({
-  afosDesignation,
+export default function ManageSubjectsPage({
+  params,
 }: {
-  afosDesignation: string;
+  params: { moduleId: number };
 }) {
+  const [subjects, setSubjects] = useState<Subjects[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [modules, setModules] = useState<Modules[]>([]);
 
   useEffect(() => {
-    async function fetchModulesData() {
+    async function fetchSubjectsData() {
       try {
-        const { success, data, message } = await ReadModules({
-          afos_code: afosDesignation,
+        const { success, data, message } = await ReadSubjects({
+          module_id: params.moduleId,
         });
         if (success) {
-          setModules(data as Array<Modules>);
+          setSubjects(data as Array<Subjects>);
         } else {
           console.log(message || "An error occurred");
         }
@@ -41,30 +41,30 @@ export default function SubjectsList({
       }
     }
 
-    fetchModulesData();
-  }, [afosDesignation]);
+    fetchSubjectsData();
+  }, [params.moduleId]);
 
   return isLoading ? (
     <Loader />
   ) : (
     <div className="grid gap-4">
-      <PageTitle title={`Modules for ${afosDesignation}`} />
-      {modules.map((module) => {
+      <PageTitle title="Subjects" />
+      {subjects.map((module) => {
         return (
           <div
-            key={module.module_id}
+            key={module.subject_code}
             className="border rounded-lg overflow-hidden"
           >
             <Link
-              href={`/student/courses/${module.module_id}`}
+              href={`/student/courses/${params.moduleId}/${module.subject_code}`}
               className="flex "
             >
               <div className="w-6 h-24 bg-darkGreen-400"> </div>
               <div className="flex p-4 my-4 items-center gap-6">
                 <div className="text-lg font-semibold">
-                  Module {module.module_number}
+                  {module.subject_code}
                 </div>
-                <div>{module.module}</div>
+                <div>{module.subject}</div>
               </div>
             </Link>
           </div>
