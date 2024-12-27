@@ -13,6 +13,7 @@ export async function login({
   const sql = getDatabaseConnection();
 
   try {
+    // Check if email exists
     const emailFound =
       await sql`SELECT 1 FROM Users WHERE email = ${email} LIMIT 1`;
 
@@ -20,6 +21,7 @@ export async function login({
       return { success: false, message: "No email found" };
     }
 
+    // Check if email and password match
     const user =
       await sql`SELECT * FROM Users WHERE email = ${email} AND password = ${password}`;
 
@@ -32,7 +34,11 @@ export async function login({
       const userType = user[0].role;
       let redirectURL = "";
 
-      if (userType === "Student") {
+      if (userType === "Instructor") {
+        redirectURL = "/instructor/dashboard";
+      } else if (userType === "Admin") {
+        redirectURL = "/admin/dashboard";
+      } else if (userType === "Student") {
         redirectURL = "/student/dashboard";
         const afosDesignation =
           await sql`SELECT * FROM Students WHERE user_id = ${user[0].user_id}`;
@@ -40,10 +46,6 @@ export async function login({
           httpOnly: true,
           maxAge: 60 * 60 * 24,
         });
-      } else if (userType === "Instructor") {
-        redirectURL = "/instructor/dashboard";
-      } else if (userType === "Admin") {
-        redirectURL = "/admin/dashboard";
       }
 
       (await cookies()).set("userType", userType, {
@@ -65,10 +67,7 @@ export async function login({
   } catch (error) {
     return {
       success: false,
-      message:
-        error instanceof Error
-          ? error.message
-          : "An error occurred while fetching email",
+      message: error instanceof Error ? error.message : "An error occurred",
     };
   }
 }

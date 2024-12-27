@@ -29,7 +29,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const router = useRouter();
   const [loginError, setLoginError] = useState("");
-  const [visibility, setVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   // Initialize the form with validation schema and default values
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,28 +40,15 @@ export default function LoginPage() {
     },
   });
 
-  function togglePasswordVisibility() {
-    setVisibility((current) => !current);
-  }
-
-  function removeLoginError() {
-    setLoginError("");
-  }
-
   // Handle the login form submission
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(() => {
       login(values).then((response) => {
         const { redirectURL, message } = response;
         // Error block
-        if (message) {
-          setLoginError(message);
-          return;
-        }
+        if (message) setLoginError(message);
         // Success block
-        if (redirectURL) {
-          router.push(redirectURL);
-        }
+        if (redirectURL) router.push(redirectURL);
       });
     });
   }
@@ -106,7 +93,7 @@ export default function LoginPage() {
                         placeholder="example@domain.com"
                         {...field}
                         onChange={(e) => {
-                          removeLoginError();
+                          setLoginError("");
                           field.onChange(e);
                         }}
                       />
@@ -127,20 +114,22 @@ export default function LoginPage() {
                     <FormControl>
                       <div className="relative">
                         <Input
-                          type={visibility ? "text" : "password"}
+                          type={passwordVisibility ? "text" : "password"}
                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                           {...field}
                           onChange={(e) => {
-                            removeLoginError();
+                            setLoginError("");
                             field.onChange(e);
                           }}
                         />
                         <button
-                          onClick={togglePasswordVisibility}
+                          onClick={() =>
+                            setPasswordVisibility((current) => !current)
+                          }
                           type="button"
                           className="opacity-50 absolute inset-y-0 right-2 hover:opacity-80"
                         >
-                          {visibility ? (
+                          {passwordVisibility ? (
                             <Eye className="h-5" />
                           ) : (
                             <EyeOff className="h-5" />
