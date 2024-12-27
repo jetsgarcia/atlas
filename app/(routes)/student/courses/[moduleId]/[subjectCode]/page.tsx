@@ -3,6 +3,7 @@
 import { ReadVideos } from "@/actions/db/read-video";
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -47,7 +48,12 @@ export default function VideosPage({
     <Loader />
   ) : (
     <div className="grid gap-4">
-      <PageTitle title="Videos" />
+      <div className="flex items-center gap-2">
+        <Link href={`/student/courses/${params.moduleId}`}>
+          <ChevronLeft />
+        </Link>
+        <PageTitle title="Videos" />
+      </div>
       {video.map((video) => {
         return (
           <div

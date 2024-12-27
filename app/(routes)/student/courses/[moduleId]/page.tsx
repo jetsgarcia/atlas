@@ -5,6 +5,7 @@ import { ReadSubjects } from "@/actions/db/read-subject";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader";
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 interface Subjects {
   subject_code: string;
@@ -48,7 +49,12 @@ export default function ManageSubjectsPage({
     <Loader />
   ) : (
     <div className="grid gap-4">
-      <PageTitle title="Subjects" />
+      <div className="flex items-center gap-2">
+        <Link href="/student/courses">
+          <ChevronLeft />
+        </Link>
+        <PageTitle title="Subjects" />
+      </div>
       {subjects.map((subject) => {
         return (
           <div
