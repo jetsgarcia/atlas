@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Pencil, Trash } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface Video {
@@ -70,7 +71,15 @@ export default function SubjectVideos() {
                       <TableRow key={record.video_id}>
                         <TableCell>{record.title}</TableCell>
                         <TableCell>{record.description}</TableCell>
-                        <TableCell>{record.url}</TableCell>
+                        <TableCell>
+                          <Link
+                            className="text-blue-700 underline"
+                            href={record.url}
+                            target="_blank"
+                          >
+                            {record.url}
+                          </Link>
+                        </TableCell>
                         <TableCell>
                           <Button variant="ghost">
                             <Pencil size={16} />

@@ -35,7 +35,7 @@ export async function login({
       let redirectURL = "";
 
       if (userType === "Instructor") {
-        redirectURL = "/instructor/dashboard";
+        redirectURL = "/instructor/subjects";
       } else if (userType === "Admin") {
         redirectURL = "/admin/dashboard";
       } else if (userType === "Student") {

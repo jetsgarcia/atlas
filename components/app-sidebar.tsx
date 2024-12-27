@@ -72,11 +72,6 @@ const studentRecords = [
 // Menu items for home
 const instructorHome = [
   {
-    title: "Dashboard",
-    url: "/instructor/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
     title: "Subjects",
     url: "/instructor/subjects",
     icon: Book,

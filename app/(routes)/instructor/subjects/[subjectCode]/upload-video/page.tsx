@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import Loader from "@/components/loader";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function ManageVideosPage({
   params,
@@ -31,7 +33,12 @@ export default function ManageVideosPage({
       }}
       className="max-w-[40rem] m-auto grid gap-4"
     >
-      <h1 className="text-2xl font-bold">Upload Video</h1>
+      <div className="flex items-center gap-4">
+        <Link href={`/instructor/subjects/${params.subjectCode}`}>
+          <ChevronLeft />
+        </Link>
+        <h1 className="text-2xl font-bold">Upload Video</h1>
+      </div>
       <div>
         <Label htmlFor="file">File</Label>
         <Input id="file" name="file" type="file" accept="video/*" required />

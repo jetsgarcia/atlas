@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   if (userType === "Instructor") {
     if (!pathname.startsWith("/instructor")) {
       return NextResponse.redirect(
-        new URL("/instructor/dashboard", request.url)
+        new URL("/instructor/subjects", request.url)
       );
     }
   }
