@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadVideos } from "@/actions/read-video";
+import { ReadVideos } from "@/actions/db/read-video";
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
 import Link from "next/link";

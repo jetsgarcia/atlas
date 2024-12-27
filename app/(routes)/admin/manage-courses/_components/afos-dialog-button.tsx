@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import CreateAFOS from "@/actions/admin/create-afos";
+import CreateAFOS from "@/actions/db/create-afos";
 
 type AFOSLevel = "Basic" | "Advanced";
 

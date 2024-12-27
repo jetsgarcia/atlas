@@ -1,4 +1,4 @@
-import { ReadAllVideos } from "@/actions/instructor/read-videos";
+import { ReadAllVideos } from "@/actions/db/read-videos";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";

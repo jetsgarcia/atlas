@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/page-title";
-import { ReadSubjects } from "@/actions/admin/read-subject";
+import { ReadSubjects } from "@/actions/db/read-subject";
 import { useEffect, useState } from "react";
 import {
   Table,

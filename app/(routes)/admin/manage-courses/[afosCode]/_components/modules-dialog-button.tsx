@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import CreateModule from "@/actions/admin/create-module";
+import CreateModule from "@/actions/db/create-module";
 import { toast } from "@/hooks/use-toast";
 
 export default function ModulesDialogButton({

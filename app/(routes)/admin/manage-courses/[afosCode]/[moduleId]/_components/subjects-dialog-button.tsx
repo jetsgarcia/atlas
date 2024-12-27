@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import CreateSubject from "@/actions/admin/create-subject";
+import CreateSubject from "@/actions/db/create-subject";
 import { toast } from "@/hooks/use-toast";
 
 export default function SubjectsDialogButton({

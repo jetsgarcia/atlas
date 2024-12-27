@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadModules } from "@/actions/admin/read-module";
+import { ReadModules } from "@/actions/db/read-module";
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
 import Link from "next/link";

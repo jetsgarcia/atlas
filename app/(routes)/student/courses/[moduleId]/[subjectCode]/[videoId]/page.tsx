@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadVideos } from "@/actions/read-video";
+import { ReadVideos } from "@/actions/db/read-video";
 import Loader from "@/components/loader";
 import { Input } from "@/components/ui/input";
 import { ChevronLeft, SendHorizonal } from "lucide-react";

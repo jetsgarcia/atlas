@@ -1,4 +1,4 @@
-import { ReadAllUsers } from "@/actions/admin/read-user";
+import { ReadAllUsers } from "@/actions/db/read-user";
 import { User, columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 import PageTitle from "@/components/page-title";

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { startTransition, useState } from "react";
-import { login } from "@/actions/login";
+import { login } from "@/actions/authentication/login";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadUser } from "@/actions/admin/read-user";
+import { ReadUser } from "@/actions/db/read-user";
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
 import { useEffect, useState } from "react";
