@@ -5,7 +5,7 @@ import PageTitle from "@/components/page-title";
 import UsersDialogButton from "./_components/users-dialog-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 
-async function getData(): Promise<User[]> {
+async function getAllUsers(): Promise<User[]> {
   try {
     const { success, data, message } = await ReadAllUsers();
     if (success) {
@@ -21,7 +21,7 @@ async function getData(): Promise<User[]> {
 }
 
 export default async function ManageUsersPage() {
-  const data = await getData();
+  const data = await getAllUsers();
 
   return (
     <div className="py-5 max-w-[80rem] mx-10 xl:mx-auto">
