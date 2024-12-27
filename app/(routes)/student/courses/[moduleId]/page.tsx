@@ -49,22 +49,22 @@ export default function ManageSubjectsPage({
   ) : (
     <div className="grid gap-4">
       <PageTitle title="Subjects" />
-      {subjects.map((module) => {
+      {subjects.map((subject) => {
         return (
           <div
-            key={module.subject_code}
+            key={subject.subject_code}
             className="border rounded-lg overflow-hidden"
           >
             <Link
-              href={`/student/courses/${params.moduleId}/${module.subject_code}`}
+              href={`/student/courses/${params.moduleId}/${subject.subject_code}`}
               className="flex "
             >
               <div className="w-6 h-24 bg-darkGreen-400"> </div>
               <div className="flex p-4 my-4 items-center gap-6">
                 <div className="text-lg font-semibold">
-                  {module.subject_code}
+                  {subject.subject_code}
                 </div>
-                <div>{module.subject}</div>
+                <div>{subject.subject}</div>
               </div>
             </Link>
           </div>

@@ -18,6 +18,12 @@ export async function logout() {
     maxAge: 0,
   });
 
+  // Remove the afosDesignation cookie by setting it with a maxAge of 0
+  (await cookies()).set("afosDesignation", "", {
+    httpOnly: true,
+    maxAge: 0,
+  });
+
   return {
     success: true,
     message: "Logged out successfully",
