@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   // Students can only access /student and its sub-routes
   if (userType === "Student") {
     if (!pathname.startsWith("/student")) {
-      return NextResponse.redirect(new URL("/student/dashboard", request.url));
+      return NextResponse.redirect(new URL("/student/courses", request.url));
     }
   }
 
@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   if (userType === "Instructor") {
     if (!pathname.startsWith("/instructor")) {
       return NextResponse.redirect(
-        new URL("/instructor/dashboard", request.url)
+        new URL("/instructor/subjects", request.url)
       );
     }
   }

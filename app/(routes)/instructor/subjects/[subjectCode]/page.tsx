@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import AddVideoButton from "./_components/add-video-button";
 import SubjectVideos from "./_components/subject-videos";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function ManageCourseMaterialsPage({
   params,
@@ -17,7 +19,12 @@ export default function ManageCourseMaterialsPage({
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
-        <h2 className="text-2xl font-semibold">{params.subjectCode}</h2>
+        <div className="flex items-center gap-4">
+          <Link href="/instructor/subjects">
+            <ChevronLeft />
+          </Link>
+          <h2 className="text-2xl font-semibold">{params.subjectCode}</h2>
+        </div>
         <div>
           <Button
             variant="link"
