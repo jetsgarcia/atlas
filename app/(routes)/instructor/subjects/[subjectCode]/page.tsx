@@ -8,6 +8,7 @@ import AddVideoButton from "./_components/add-video-button";
 import SubjectVideos from "./_components/subject-videos";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import ManageExam from "./_components/manage-exam";
 
 export default function ManageCourseMaterialsPage({
   params,
@@ -68,7 +69,9 @@ export default function ManageCourseMaterialsPage({
             <SubjectVideos />
           </div>
         ) : null}
-        {page === 2 ? <div>Exam</div> : null}
+        {page === 2 ? (
+          <ManageExam params={{ subjectCode: params.subjectCode }} />
+        ) : null}
         {page === 3 ? <div>Grades</div> : null}
       </div>
     </div>
