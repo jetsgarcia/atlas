@@ -5,6 +5,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Save } from "lucide-react";
 import { useState } from "react";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function ManageExam({
   params,
@@ -13,6 +30,13 @@ export default function ManageExam({
 }) {
   const [examEditor, setExamEditor] = useState(false);
   const [openAddQuestion, setOpenAddQuestion] = useState(false);
+  const [date, setDate] = useState<Date>();
+  const [selectedHour, setSelectedHour] = useState("");
+
+  const hours = Array.from(
+    { length: 24 },
+    (_, i) => `${i.toString().padStart(2, "0")}:00`
+  );
 
   return examEditor ? (
     <div>
@@ -25,11 +49,12 @@ export default function ManageExam({
             }}
             variant="ghost"
           >
-            Cancel
+            Go back
           </Button>
           <Button
             onClick={() => {
               setExamEditor(false);
+              console.log(selectedHour);
             }}
           >
             <Save />
@@ -37,6 +62,47 @@ export default function ManageExam({
           </Button>
         </div>
       </div>
+      <div className="flex gap-4 items-center">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {date ? format(date, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        <div
+          className={selectedHour ? "w-48 text-black" : "w-48 text-gray-500"}
+        >
+          <Select value={selectedHour} onValueChange={setSelectedHour}>
+            <SelectTrigger>
+              <SelectValue placeholder="Pick a time" />
+            </SelectTrigger>
+            <SelectContent>
+              {hours.map((hour) => (
+                <SelectItem key={hour} value={hour}>
+                  {hour}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
       <div className="mt-4">
         {openAddQuestion ? (
           <div className="border p-4 rounded">
@@ -57,6 +123,23 @@ export default function ManageExam({
                 <Label htmlFor="c">c:</Label>
                 <Input id="c" name="c" type="text" required />
               </div>
+            </div>
+            <div className="flex justify-end gap-4 items-center mt-4">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setOpenAddQuestion(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setOpenAddQuestion(false);
+                }}
+              >
+                Add question
+              </Button>
             </div>
           </div>
         ) : (
