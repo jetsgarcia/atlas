@@ -1,64 +1,48 @@
-"use client";
-
-import PageTitle from "@/components/page-title";
-import { ReadSubjects } from "@/actions/db/read-subject";
-import { useEffect, useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, Pencil, Trash } from "lucide-react";
-import Loader from "@/components/loader";
-import EmptyPlaceholder from "@/components/empty-placeholder";
 import Link from "next/link";
-import SubjectsDialogButton from "./_components/subjects-dialog-button";
+import { ReadSubjects } from "@/features/admin/manage-subjects/actions/read-subjects";
 
-interface Subject {
-  subject_code: string;
-  subject: string;
-  instructor: number;
-  module_id: number;
+// Components
+import AddSubjectButton from "@/features/admin/manage-subjects/components/add-subject-button";
+import PageTitle from "@/components/page-title";
+import EmptyPlaceholder from "@/components/empty-placeholder";
+import { DataTable } from "@/features/admin/manage-subjects/components/data-table";
+import { ChevronLeft } from "lucide-react";
+import {
+  Subject,
+  columns,
+} from "@/features/admin/manage-subjects/components/columns";
+
+async function getSubjects({
+  moduleId,
+}: {
+  moduleId: number;
+}): Promise<Subject[]> {
+  try {
+    const { success, data, message } = await ReadSubjects({
+      module_id: moduleId,
+    });
+    if (success) {
+      return data as Array<Subject>;
+    } else {
+      console.log(message || "An error occurred");
+      return [];
+    }
+  } catch (error: unknown) {
+    console.log(error instanceof Error ? error.message : "An error occurred");
+    return [];
+  }
 }
 
-export default function ManageSubjectsPage({
+export default async function ManageSubjectsPage({
   params,
 }: {
   params: { moduleId: number; afosCode: string };
 }) {
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchSubjects() {
-      try {
-        const { success, data, message } = await ReadSubjects({
-          module_id: params.moduleId,
-        });
-        if (success) {
-          setSubjects(data as Array<Subject>);
-        } else {
-          console.log(message || "An error occurred");
-        }
-      } catch (error: unknown) {
-        console.log(
-          error instanceof Error ? error.message : "An error occurred"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchSubjects();
-  }, [params.moduleId]);
+  const data = await getSubjects({ moduleId: params.moduleId });
 
   return (
-    <div className="py-5 max-w-[80rem] mx-10 xl:mx-auto">
-      <div className="grid gap-6">
+    <div className=" max-w-[80rem] mx-10 xl:mx-auto">
+      <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <Link
@@ -67,61 +51,14 @@ export default function ManageSubjectsPage({
             >
               <ChevronLeft />
             </Link>
-            <PageTitle title={`Subjects`} />
+            <PageTitle title="Subjects Management" />
           </div>
-          <SubjectsDialogButton moduleId={params.moduleId} />
+          <AddSubjectButton moduleId={params.moduleId} />
         </div>
-        {isLoading ? (
-          <Loader />
+        {data.length === 0 ? (
+          <EmptyPlaceholder />
         ) : (
-          <>
-            {subjects.length === 0 ? (
-              <EmptyPlaceholder />
-            ) : (
-              <div className="grid gap-2">
-                <h3 className="text-lg font-semibold text-green-800">
-                  Subjects List
-                </h3>
-                <Table className="border">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[140px]">Subject code</TableHead>
-                      <TableHead className="w-[140px]">Instructor ID</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead className="w-[40px]"></TableHead>
-                      <TableHead className="w-[40px]"></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {subjects.map((record) => (
-                      <TableRow key={record.subject_code}>
-                        <TableCell>{record.subject_code}</TableCell>
-                        <TableCell className="underline">
-                          <Link
-                            className="font-medium text-blue-600 underline"
-                            href={`/admin/manage-users/${record.instructor}`}
-                          >
-                            {record.instructor}
-                          </Link>
-                        </TableCell>
-                        <TableCell>{record.subject}</TableCell>
-                        <TableCell>
-                          <Button variant="ghost">
-                            <Pencil size={16} />
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <Button variant="ghost">
-                            <Trash size={16} />
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )}
-          </>
+          <DataTable columns={columns} data={data} />
         )}
       </div>
     </div>

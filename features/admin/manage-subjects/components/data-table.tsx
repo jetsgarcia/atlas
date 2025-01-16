@@ -12,9 +12,9 @@ import {
 } from "@tanstack/react-table";
 
 // Components
+import EmptyPlaceholder from "@/components/empty-placeholder";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import EmptyPlaceholder from "@/components/empty-placeholder";
 import {
   Table,
   TableBody,
@@ -51,10 +51,10 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center">
         <Input
-          placeholder="Filter module..."
-          value={(table.getColumn("module")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter subject..."
+          value={(table.getColumn("subject")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("module")?.setFilterValue(event.target.value)
+            table.getColumn("subject")?.setFilterValue(event.target.value)
           }
           className="max-w-sm mb-4"
         />

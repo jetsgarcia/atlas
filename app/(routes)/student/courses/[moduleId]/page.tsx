@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "@/components/page-title";
-import { ReadSubjects } from "@/actions/db/read-subject";
+import { ReadSubjects } from "@/features/admin/manage-subjects/actions/read-subjects";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader";
 import Link from "next/link";

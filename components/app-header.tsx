@@ -36,8 +36,8 @@ export default function AppHeader() {
     "/student/grades": "Grades",
     "/student/profile": "Profile",
     "/admin/dashboard": "Dashboard",
-    "/admin/users": "Users",
-    "/admin/courses": "Courses",
+    "/admin/manage-users": "Users",
+    "/admin/manage-courses": "Courses",
     "/admin/profile": "Profile",
   };
 

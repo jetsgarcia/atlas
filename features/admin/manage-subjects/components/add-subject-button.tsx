@@ -1,5 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+
+// Components
+import CreateSubject from "@/features/admin/manage-subjects/actions/create-subject";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plus, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,19 +19,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Plus, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import CreateSubject from "@/actions/db/create-subject";
-import { toast } from "@/hooks/use-toast";
 
-export default function SubjectsDialogButton({
-  moduleId,
-}: {
-  moduleId: number;
-}) {
+export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
+  const router = useRouter();
   const [subjectName, setSubjectName] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -46,6 +46,8 @@ export default function SubjectsDialogButton({
         setSubjectName("");
         setSubjectCode("");
         setIsDialogOpen(false);
+
+        router.refresh();
       } else {
         toast({
           variant: "destructive",
@@ -100,7 +102,7 @@ export default function SubjectsDialogButton({
               id="code"
               className="col-span-3"
               maxLength={5}
-              onChange={(e) => setSubjectCode(e.target.value)}
+              onChange={(e) => setSubjectCode(e.target.value.toUpperCase())}
               value={subjectCode}
             />
           </div>
