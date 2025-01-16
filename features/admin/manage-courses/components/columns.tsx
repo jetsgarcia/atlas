@@ -5,6 +5,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 // Components
+import DeleteAFOSButton from "./delete-afos-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -47,7 +48,7 @@ export const columns: ColumnDef<AFOS>[] = [
   },
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -58,7 +59,7 @@ export const columns: ColumnDef<AFOS>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DeleteAFOSButton afosCode={row.original.afos_code} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

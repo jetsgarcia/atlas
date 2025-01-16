@@ -1,13 +1,13 @@
-import { ReadAllAFOS } from "@/actions/db/read-afos";
-import {
-  AFOS,
-  columns,
-} from "@/features/admin/manage-courses/components/columns";
+import { ReadAllAFOS } from "@/features/admin/manage-courses/actions/read-afos";
 
 // Components
 import PageTitle from "@/components/page-title";
 import AFOSDialogButton from "@/features/admin/manage-courses/components/afos-dialog-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
+import {
+  AFOS,
+  columns,
+} from "@/features/admin/manage-courses/components/columns";
 import { DataTable } from "@/features/admin/manage-courses/components/data-table";
 
 async function getAllAFOS(): Promise<AFOS[]> {
