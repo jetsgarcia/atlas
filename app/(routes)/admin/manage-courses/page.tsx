@@ -29,7 +29,7 @@ export default async function ManageCoursesPage() {
   const data = await getAllAFOS();
 
   return (
-    <div className="2xl:py-5 max-w-[80rem] mx-10 xl:mx-auto">
+    <div className="max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <PageTitle title="AFOS Management" />

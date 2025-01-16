@@ -5,7 +5,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 // Components
-import DeleteAFOSButton from "@/features/admin/manage-courses/components/delete-afos-button";
+import DeleteModuleButton from "@/features/admin/manage-modules/components/delete-module-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,37 +14,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type AFOS = {
+export type Module = {
+  module_id: number;
+  module_number: number;
+  module: string;
   afos_code: string;
-  afos: string;
-  level: string;
 };
 
-export const columns: ColumnDef<AFOS>[] = [
+export const columns: ColumnDef<Module>[] = [
   {
-    accessorKey: "afos_code",
-    header: "Code",
+    accessorKey: "module_id",
+    header: "Module number",
     cell: ({ row }) => {
       return (
         <Link
           className="font-medium text-blue-600 underline"
           style={{ width: "10px" }}
-          href={`/admin/manage-courses/${row.original.afos_code}`}
+          href={`/admin/manage-courses/${row.original.afos_code}/${row.original.module_number}`}
         >
-          {row.original.afos_code}
+          {row.original.module_number}
         </Link>
       );
     },
   },
   {
-    accessorKey: "level",
-    header: "Level",
-  },
-  {
-    accessorKey: "afos",
+    accessorKey: "module",
     header: "Name",
-    enableResizing: true,
-    size: 1,
   },
   {
     id: "actions",
@@ -59,7 +54,7 @@ export const columns: ColumnDef<AFOS>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DeleteAFOSButton afosCode={row.original.afos_code} />
+            <DeleteModuleButton moduleId={row.original.module_id} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

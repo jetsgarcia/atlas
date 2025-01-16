@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+
+// Components
 import {
   Dialog,
   DialogContent,
@@ -13,11 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
-import CreateModule from "@/actions/db/create-module";
-import { toast } from "@/hooks/use-toast";
+import CreateModule from "@/features/admin/manage-modules/actions/create-module";
 
-export default function ModulesDialogButton({
+export default function AddModuleButton({
   afosCode,
   moduleLength,
 }: {
@@ -27,6 +30,7 @@ export default function ModulesDialogButton({
   const [moduleName, setModuleName] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setModuleNumber(moduleLength + 1);
@@ -52,6 +56,8 @@ export default function ModulesDialogButton({
         setModuleNumber(0);
         setModuleName("");
         setIsDialogOpen(false);
+
+        router.refresh();
       } else {
         toast({
           variant: "destructive",

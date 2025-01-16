@@ -1,63 +1,47 @@
-"use client";
-
-import PageTitle from "@/components/page-title";
-import { ReadModules } from "@/actions/db/read-module";
-import { useEffect, useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, Pencil, Trash } from "lucide-react";
-import Loader from "@/components/loader";
-import EmptyPlaceholder from "@/components/empty-placeholder";
+import { ReadModules } from "@/features/admin/manage-modules/actions/read-module";
 import Link from "next/link";
-import ModulesDialogButton from "./_components/modules-dialog-button";
 
-interface Module {
-  module_id: number;
-  module_number: number;
-  module: string;
-  afos_code: string;
+// Components
+import AddModuleButton from "@/features/admin/manage-modules/components/add-module-button";
+import PageTitle from "@/components/page-title";
+import EmptyPlaceholder from "@/components/empty-placeholder";
+import { DataTable } from "@/features/admin/manage-modules/components/data-table";
+import {
+  Module,
+  columns,
+} from "@/features/admin/manage-modules/components/columns";
+import { ChevronLeft } from "lucide-react";
+
+async function getModules({
+  afosCode,
+}: {
+  afosCode: string;
+}): Promise<Module[]> {
+  try {
+    const { success, data, message } = await ReadModules({
+      afos_code: afosCode,
+    });
+    if (success) {
+      return data as Array<Module>;
+    } else {
+      console.log(message || "An error occurred");
+      return [];
+    }
+  } catch (error: unknown) {
+    console.log(error instanceof Error ? error.message : "An error occurred");
+    return [];
+  }
 }
 
-export default function ManageModulesPage({
+export default async function ManageModulesPage({
   params,
 }: {
   params: { afosCode: string };
 }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [modules, setModules] = useState<Module[]>([]);
-
-  useEffect(() => {
-    async function fetchModules() {
-      try {
-        const { success, data, message } = await ReadModules({
-          afos_code: params.afosCode,
-        });
-        if (success) {
-          setModules(data as Array<Module>);
-        } else {
-          console.log(message || "An error occurred");
-        }
-      } catch (error: unknown) {
-        console.log(
-          error instanceof Error ? error.message : "An error occurred"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchModules();
-  }, [params.afosCode]);
+  const data = await getModules({ afosCode: params.afosCode });
 
   return (
-    <div className="py-5 max-w-[80rem] mx-10 xl:mx-auto">
+    <div className=" max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
@@ -67,62 +51,17 @@ export default function ManageModulesPage({
             >
               <ChevronLeft />
             </Link>
-            <PageTitle title={`Modules for ${params.afosCode}`} />
+            <PageTitle title="Modules Management" />
           </div>
-          <ModulesDialogButton
+          <AddModuleButton
             afosCode={params.afosCode}
-            moduleLength={modules.length}
+            moduleLength={data.length}
           />
         </div>
-        {isLoading ? (
-          <Loader />
+        {data.length === 0 ? (
+          <EmptyPlaceholder />
         ) : (
-          <>
-            {modules.length === 0 ? (
-              <EmptyPlaceholder />
-            ) : (
-              <div className="grid gap-2">
-                <h3 className="text-lg font-semibold text-green-800">
-                  Modules List
-                </h3>
-                <Table className="border">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[140px]">Module number</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead className="w-[40px]"></TableHead>
-                      <TableHead className="w-[40px]"></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {modules.map((record) => (
-                      <TableRow key={record.module_id}>
-                        <TableCell>
-                          <Link
-                            className="font-medium text-blue-600 underline"
-                            href={`/admin/manage-courses/${record.afos_code}/${record.module_id}`}
-                          >
-                            Module {record.module_number}
-                          </Link>
-                        </TableCell>
-                        <TableCell>{record.module}</TableCell>
-                        <TableCell>
-                          <Button variant="ghost">
-                            <Pencil size={16} />
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <Button variant="ghost">
-                            <Trash size={16} />
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            )}
-          </>
+          <DataTable columns={columns} data={data} />
         )}
       </div>
     </div>
