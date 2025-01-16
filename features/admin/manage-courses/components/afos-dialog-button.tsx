@@ -1,6 +1,15 @@
 "use client";
 
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+// Components
+import CreateAFOS from "@/features/admin/manage-courses/actions/create-afos";
+import { ChevronsUpDown, Plus, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -10,18 +19,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ChevronsUpDown, Plus, X } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import CreateAFOS from "@/actions/db/create-afos";
 
 type AFOSLevel = "Basic" | "Advanced";
 
@@ -33,6 +36,7 @@ export default function AFOSDialogButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   function handleSubmit() {
     setIsSubmitting(true);
@@ -54,6 +58,8 @@ export default function AFOSDialogButton() {
         setAfosName("");
         setAfosCode("");
         setIsDialogOpen(false);
+
+        router.refresh();
       } else {
         toast({
           variant: "destructive",
