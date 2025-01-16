@@ -1,26 +1,14 @@
 import { ReadAllAFOS } from "@/actions/db/read-afos";
-import Link from "next/link";
+import {
+  AFOS,
+  columns,
+} from "@/features/admin/manage-courses/components/columns";
 
 // Components
 import PageTitle from "@/components/page-title";
 import AFOSDialogButton from "@/features/admin/manage-courses/components/afos-dialog-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
-import { Pencil, Trash } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-interface AFOS {
-  afos_code: string;
-  afos: string;
-  level: string;
-}
+import { DataTable } from "@/features/admin/manage-courses/components/data-table";
 
 async function getAllAFOS(): Promise<AFOS[]> {
   try {
@@ -50,45 +38,7 @@ export default async function ManageCoursesPage() {
         {data.length === 0 ? (
           <EmptyPlaceholder />
         ) : (
-          <div className="grid gap-2">
-            <Table className="border">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[120px]">Code</TableHead>
-                  <TableHead className="w-[140px]">Level</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead className="w-[40px]"></TableHead>
-                  <TableHead className="w-[40px]"></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.map((record) => (
-                  <TableRow key={record.afos_code}>
-                    <TableCell>
-                      <Link
-                        className="font-medium text-blue-600 underline"
-                        href={`/admin/manage-courses/${record.afos_code}`}
-                      >
-                        {record.afos_code}
-                      </Link>
-                    </TableCell>
-                    <TableCell>{record.level}</TableCell>
-                    <TableCell>{record.afos}</TableCell>
-                    <TableCell>
-                      <Button variant="ghost">
-                        <Pencil size={16} />
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="ghost">
-                        <Trash size={16} />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+          <DataTable columns={columns} data={data} />
         )}
       </div>
     </div>

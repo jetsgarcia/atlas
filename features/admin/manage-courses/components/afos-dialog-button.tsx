@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CreateAFOS from "@/actions/db/create-afos";
+import { useRouter } from "next/navigation";
 
 type AFOSLevel = "Basic" | "Advanced";
 
@@ -33,6 +34,7 @@ export default function AFOSDialogButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   function handleSubmit() {
     setIsSubmitting(true);
@@ -54,6 +56,8 @@ export default function AFOSDialogButton() {
         setAfosName("");
         setAfosCode("");
         setIsDialogOpen(false);
+
+        router.refresh();
       } else {
         toast({
           variant: "destructive",

@@ -1,4 +1,4 @@
-import Banner from "@/features/login/components/Banner";
+import Banner from "@/features/login/components/banner";
 import LoginForm from "@/features/login/components/login-form";
 
 export default function LoginPage() {
