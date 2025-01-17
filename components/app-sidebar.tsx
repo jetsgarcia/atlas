@@ -33,14 +33,14 @@ const adminHome = [
 // Menu items for administration
 const adminAdministration = [
   {
-    title: "Users",
-    url: "/admin/manage-users",
-    icon: User,
-  },
-  {
     title: "Courses",
     url: "/admin/manage-courses",
     icon: Book,
+  },
+  {
+    title: "Users",
+    url: "/admin/manage-users",
+    icon: User,
   },
 ];
 
