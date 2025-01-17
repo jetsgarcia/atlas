@@ -180,7 +180,7 @@ export default function AddUserInputs({
         )}
         <div className="flex gap-4">
           <Label htmlFor="last-name" className="text-right w-1/3">
-            Last name <span className="text-red-400">*</span>
+            Last name<span className="text-red-400">*</span>
           </Label>
           <Input
             id="last-name"
@@ -191,7 +191,7 @@ export default function AddUserInputs({
         </div>
         <div className="flex gap-4">
           <Label htmlFor="first-name" className="text-right w-1/3">
-            First name <span className="text-red-400">*</span>
+            First name<span className="text-red-400">*</span>
           </Label>
           <Input
             id="first-name"
@@ -225,7 +225,7 @@ export default function AddUserInputs({
         </div>
         <div className="flex gap-4">
           <Label htmlFor="email" className="text-right w-1/3">
-            Email <span className="text-red-400">*</span>
+            Email<span className="text-red-400">*</span>
           </Label>
           <Input
             id="email"
@@ -236,7 +236,7 @@ export default function AddUserInputs({
         </div>
         <div className="flex gap-4">
           <Label htmlFor="password" className="text-right w-1/3">
-            Password <span className="text-red-400">*</span>
+            Password<span className="text-red-400">*</span>
           </Label>
           <Input
             id="password"
