@@ -28,7 +28,7 @@ import {
 
 type AFOSLevel = "Basic" | "Advanced";
 
-export default function AFOSDialogButton() {
+export default function AddAFOSButton() {
   const { toast } = useToast();
   const [afosLevel, setAfosLevel] = useState<AFOSLevel>("Basic");
   const [afosName, setAfosName] = useState("");

@@ -2,7 +2,7 @@ import { ReadAllAFOS } from "@/features/admin/manage-courses/actions/read-afos";
 
 // Components
 import PageTitle from "@/components/page-title";
-import AFOSDialogButton from "@/features/admin/manage-courses/components/afos-dialog-button";
+import AddAFOSButton from "@/features/admin/manage-courses/components/add-afos-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import {
   AFOS,
@@ -33,7 +33,7 @@ export default async function ManageCoursesPage() {
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <PageTitle title="AFOS Management" />
-          <AFOSDialogButton />
+          <AddAFOSButton />
         </div>
         {data.length === 0 ? (
           <EmptyPlaceholder />
