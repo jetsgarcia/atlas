@@ -48,17 +48,15 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center">
-        <Input
-          placeholder="Filter subject..."
-          value={(table.getColumn("subject")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("subject")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm mb-4"
-        />
-      </div>
+    <div className="grid gap-4">
+      <Input
+        placeholder="Filter subject..."
+        value={(table.getColumn("subject")?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn("subject")?.setFilterValue(event.target.value)
+        }
+        className="w-full"
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -103,7 +101,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-end space-x-2">
         <Button
           variant="outline"
           size="sm"
