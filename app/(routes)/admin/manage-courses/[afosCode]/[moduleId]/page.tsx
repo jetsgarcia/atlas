@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { ReadSubjects } from "@/features/admin/manage-subjects/actions/read-subjects";
+import { ReadSubjects } from "@/app/_features/admin/manage-subjects/actions/read-subjects";
 
 // Components
-import AddSubjectButton from "@/features/admin/manage-subjects/components/add-subject-button";
+import AddSubjectButton from "@/app/_features/admin/manage-subjects/components/add-subject-button";
 import PageTitle from "@/components/page-title";
 import EmptyPlaceholder from "@/components/empty-placeholder";
-import { DataTable } from "@/features/admin/manage-subjects/components/data-table";
+import { DataTable } from "@/app/_features/admin/manage-subjects/components/data-table";
 import { ChevronLeft } from "lucide-react";
 import {
   Subject,
   columns,
-} from "@/features/admin/manage-subjects/components/columns";
+} from "@/app/_features/admin/manage-subjects/components/columns";
 
 async function getSubjects({
   moduleId,

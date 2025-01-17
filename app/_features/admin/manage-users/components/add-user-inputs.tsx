@@ -2,14 +2,14 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import CreateStudent from "@/features/admin/manage-users/actions/create-student";
-import { ReadUserByEmail } from "@/features/admin/manage-users/actions/read-user";
+import CreateStudent from "@/app/_features/admin/manage-users/actions/create-student";
+import { ReadUserByEmail } from "@/app/_features/admin/manage-users/actions/read-user";
 import { useState } from "react";
 
 // Components
 import { Label } from "@/components/ui/label";
 import { ChevronsUpDown } from "lucide-react";
-import CreateUser from "@/features/admin/manage-users/actions/create-user";
+import CreateUser from "@/app/_features/admin/manage-users/actions/create-user";
 import { Input } from "@/components/ui/input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -119,7 +119,7 @@ export default function AddUserInputs({
     <>
       <div className="grid gap-4 py-4">
         <div className="flex gap-4">
-          <Label htmlFor="level" className="text-right w-1/3">
+          <Label htmlFor="level" className="w-2/5">
             Level
           </Label>
           <DropdownMenu>
@@ -167,7 +167,7 @@ export default function AddUserInputs({
         </div>
         {role == "Student" && (
           <div className="flex gap-4">
-            <Label htmlFor="serial-number" className="text-right w-1/3">
+            <Label htmlFor="serial-number" className="w-2/5">
               Serial number<span className="text-red-400">*</span>
             </Label>
             <Input
@@ -179,7 +179,7 @@ export default function AddUserInputs({
           </div>
         )}
         <div className="flex gap-4">
-          <Label htmlFor="last-name" className="text-right w-1/3">
+          <Label htmlFor="last-name" className="w-2/5">
             Last name<span className="text-red-400">*</span>
           </Label>
           <Input
@@ -190,7 +190,7 @@ export default function AddUserInputs({
           />
         </div>
         <div className="flex gap-4">
-          <Label htmlFor="first-name" className="text-right w-1/3">
+          <Label htmlFor="first-name" className="w-2/5">
             First name<span className="text-red-400">*</span>
           </Label>
           <Input
@@ -201,7 +201,7 @@ export default function AddUserInputs({
           />
         </div>
         <div className="flex gap-4">
-          <Label htmlFor="middle-initial" className="text-right w-1/3">
+          <Label htmlFor="middle-initial" className="w-2/5">
             Middle initial
           </Label>
           <Input
@@ -213,7 +213,7 @@ export default function AddUserInputs({
           />
         </div>
         <div className="flex gap-4">
-          <Label htmlFor="suffix" className="text-right w-1/3">
+          <Label htmlFor="suffix" className="w-2/5">
             Suffix
           </Label>
           <Input
@@ -224,7 +224,7 @@ export default function AddUserInputs({
           />
         </div>
         <div className="flex gap-4">
-          <Label htmlFor="email" className="text-right w-1/3">
+          <Label htmlFor="email" className="w-2/5">
             Email<span className="text-red-400">*</span>
           </Label>
           <Input
@@ -235,7 +235,7 @@ export default function AddUserInputs({
           />
         </div>
         <div className="flex gap-4">
-          <Label htmlFor="password" className="text-right w-1/3">
+          <Label htmlFor="password" className="w-2/5">
             Password<span className="text-red-400">*</span>
           </Label>
           <Input
@@ -247,7 +247,7 @@ export default function AddUserInputs({
         </div>
         {role == "Student" && (
           <div className="flex gap-4">
-            <Label htmlFor="afos" className="text-right w-1/3">
+            <Label htmlFor="afos" className="w-2/5">
               AFOS<span className="text-red-400">*</span>
             </Label>
             <Input

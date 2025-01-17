@@ -5,7 +5,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 // Components
-import DeleteModuleButton from "@/features/admin/manage-modules/components/delete-module-button";
+import DeleteSubjectButton from "@/app/_features/admin/manage-subjects/components/delete-subject-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,31 +14,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type Module = {
+export type Subject = {
+  subject_code: string;
+  subject: string;
+  instructor: number;
   module_id: number;
-  module_number: number;
-  module: string;
-  afos_code: string;
 };
 
-export const columns: ColumnDef<Module>[] = [
+export const columns: ColumnDef<Subject>[] = [
   {
-    accessorKey: "module_id",
-    header: "Module number",
+    accessorKey: "subject_code",
+    header: "Subject code",
+  },
+  {
+    accessorKey: "instructor",
+    header: "Instructor",
     cell: ({ row }) => {
       return (
         <Link
           className="font-medium text-blue-600 underline"
-          style={{ width: "10px" }}
-          href={`/admin/manage-courses/${row.original.afos_code}/${row.original.module_number}`}
+          href={`/admin/manage-users/${row.original.instructor}`}
         >
-          {row.original.module_number}
+          {row.original.instructor}
         </Link>
       );
     },
   },
   {
-    accessorKey: "module",
+    accessorKey: "subject",
     header: "Name",
   },
   {
@@ -47,14 +50,14 @@ export const columns: ColumnDef<Module>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="text-blue-400">
+            <Button variant="ghost">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4 bg-red-500" />
+              <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DeleteModuleButton moduleId={row.original.module_id} />
+            <DeleteSubjectButton subjectCode={row.original.subject_code} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

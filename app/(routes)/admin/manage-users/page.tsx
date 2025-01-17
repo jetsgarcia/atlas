@@ -1,14 +1,14 @@
-import { ReadAllUsers } from "@/features/admin/manage-users/actions/read-user";
+import { ReadAllUsers } from "@/app/_features/admin/manage-users/actions/read-user";
 
 // Components
 import PageTitle from "@/components/page-title";
-import AddUsersButton from "@/features/admin/manage-users/components/add-users-button";
+import AddUsersButton from "@/app/_features/admin/manage-users/components/add-users-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
-import { DataTable } from "@/features/admin/manage-users/components/data-table";
+import { DataTable } from "@/app/_features/admin/manage-users/components/data-table";
 import {
   User,
   columns,
-} from "@/features/admin/manage-users/components/columns";
+} from "@/app/_features/admin/manage-users/components/columns";
 
 async function getAllUsers(): Promise<User[]> {
   try {

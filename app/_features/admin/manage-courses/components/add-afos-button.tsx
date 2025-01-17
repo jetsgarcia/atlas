@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // Components
-import CreateAFOS from "@/features/admin/manage-courses/actions/create-afos";
+import CreateAFOS from "@/app/_features/admin/manage-courses/actions/create-afos";
 import { ChevronsUpDown, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

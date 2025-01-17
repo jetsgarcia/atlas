@@ -1,15 +1,15 @@
-import { ReadModules } from "@/features/admin/manage-modules/actions/read-module";
+import { ReadModules } from "@/app/_features/admin/manage-modules/actions/read-module";
 import Link from "next/link";
 
 // Components
-import AddModuleButton from "@/features/admin/manage-modules/components/add-module-button";
+import AddModuleButton from "@/app/_features/admin/manage-modules/components/add-module-button";
 import PageTitle from "@/components/page-title";
 import EmptyPlaceholder from "@/components/empty-placeholder";
-import { DataTable } from "@/features/admin/manage-modules/components/data-table";
+import { DataTable } from "@/app/_features/admin/manage-modules/components/data-table";
 import {
   Module,
   columns,
-} from "@/features/admin/manage-modules/components/columns";
+} from "@/app/_features/admin/manage-modules/components/columns";
 import { ChevronLeft } from "lucide-react";
 
 async function getModules({

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadInstructorSubjects } from "@/features/admin/manage-subjects/actions/read-subjects";
+import { ReadInstructorSubjects } from "@/app/_features/admin/manage-subjects/actions/read-subjects";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import {

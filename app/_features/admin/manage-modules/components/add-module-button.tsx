@@ -1,15 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 // Components
-import CreateSubject from "@/features/admin/manage-subjects/actions/create-subject";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Plus, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -19,21 +14,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plus, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import CreateModule from "@/app/_features/admin/manage-modules/actions/create-module";
 
-export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
-  const router = useRouter();
-  const [subjectName, setSubjectName] = useState("");
-  const [subjectCode, setSubjectCode] = useState("");
+export default function AddModuleButton({
+  afosCode,
+  moduleLength,
+}: {
+  afosCode: string;
+  moduleLength: number;
+}) {
+  const [moduleName, setModuleName] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setModuleNumber(moduleLength + 1);
+  }, [moduleLength]);
+  const [moduleNumber, setModuleNumber] = useState(0);
 
   function handleSubmit() {
     setIsSubmitting(true);
 
-    CreateSubject({
-      moduleId: moduleId,
-      subject: subjectName,
-      subjectCode: subjectCode,
+    CreateModule({
+      moduleNumber: moduleNumber,
+      module: moduleName,
+      afosCode: afosCode,
     }).then((response) => {
       setIsSubmitting(false);
       if (response.success) {
@@ -43,8 +53,8 @@ export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
         });
 
         // Reset form
-        setSubjectName("");
-        setSubjectCode("");
+        setModuleNumber(0);
+        setModuleName("");
         setIsDialogOpen(false);
 
         router.refresh();
@@ -77,9 +87,9 @@ export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
           >
             <X />
           </Button>
-          <DialogTitle>Create new Subject</DialogTitle>
+          <DialogTitle>Create new module</DialogTitle>
           <DialogDescription>
-            Input subject details here. Click submit when you&apos;re done.
+            Input module details here. Click submit when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -90,20 +100,19 @@ export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
             <Input
               id="name"
               className="col-span-3"
-              onChange={(e) => setSubjectName(e.target.value)}
-              value={subjectName}
+              onChange={(e) => setModuleName(e.target.value)}
+              value={moduleName}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="code" className="text-right">
-              Code
+            <Label htmlFor="number" className="text-right">
+              Module number
             </Label>
             <Input
-              id="code"
+              id="number"
               className="col-span-3"
-              maxLength={5}
-              onChange={(e) => setSubjectCode(e.target.value.toUpperCase())}
-              value={subjectCode}
+              onChange={(e) => setModuleNumber(Number(e.target.value))}
+              value={moduleNumber}
             />
           </div>
         </div>

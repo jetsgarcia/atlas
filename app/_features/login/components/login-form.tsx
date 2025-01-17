@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/form";
 
 // Server actions
-import { login } from "@/features/login/actions/login";
+import { login } from "@/app/_features/login/actions/login";
 
 const formSchema = z.object({
   email: z.string().min(2, "Email required").email("Invalid email format"),

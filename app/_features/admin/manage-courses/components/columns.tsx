@@ -5,7 +5,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 // Components
-import DeleteSubjectButton from "@/features/admin/manage-subjects/components/delete-subject-button";
+import DeleteAFOSButton from "@/app/_features/admin/manage-courses/components/delete-afos-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,36 +14,37 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export type Subject = {
-  subject_code: string;
-  subject: string;
-  instructor: number;
-  module_id: number;
+export type AFOS = {
+  afos_code: string;
+  afos: string;
+  level: string;
 };
 
-export const columns: ColumnDef<Subject>[] = [
+export const columns: ColumnDef<AFOS>[] = [
   {
-    accessorKey: "subject_code",
-    header: "Subject code",
-  },
-  {
-    accessorKey: "instructor",
-    header: "Instructor",
+    accessorKey: "afos_code",
+    header: "Code",
+    size: 10,
     cell: ({ row }) => {
       return (
         <Link
           className="font-medium text-blue-600 underline"
-          style={{ width: "10px" }}
-          href={`/admin/manage-users/${row.original.instructor}`}
+          href={`/admin/manage-courses/${row.original.afos_code}`}
         >
-          {row.original.instructor}
+          {row.original.afos_code}
         </Link>
       );
     },
   },
   {
-    accessorKey: "subject",
+    accessorKey: "level",
+    header: "Level",
+  },
+  {
+    accessorKey: "afos",
     header: "Name",
+    enableResizing: true,
+    size: 1,
   },
   {
     id: "actions",
@@ -51,14 +52,14 @@ export const columns: ColumnDef<Subject>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="text-blue-400">
+            <Button variant="ghost">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4 bg-red-500" />
+              <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DeleteSubjectButton subjectCode={row.original.subject_code} />
+            <DeleteAFOSButton afosCode={row.original.afos_code} />
           </DropdownMenuContent>
         </DropdownMenu>
       );
