@@ -1,9 +1,14 @@
-import { ReadAllUsers } from "@/actions/db/read-user";
-import { User, columns } from "./_components/columns";
-import { DataTable } from "./_components/data-table";
+import { ReadAllUsers } from "@/features/admin/manage-users/actions/read-user";
+
+// Components
 import PageTitle from "@/components/page-title";
-import UsersDialogButton from "./_components/users-dialog-button";
+import AddUsersButton from "@/features/admin/manage-users/components/add-users-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
+import { DataTable } from "@/features/admin/manage-users/components/data-table";
+import {
+  User,
+  columns,
+} from "@/features/admin/manage-users/components/columns";
 
 async function getAllUsers(): Promise<User[]> {
   try {
@@ -24,11 +29,11 @@ export default async function ManageUsersPage() {
   const data = await getAllUsers();
 
   return (
-    <div className="py-5 max-w-[80rem] mx-10 xl:mx-auto">
+    <div className="max-w-[80rem] mx-10 xl:mx-auto">
       <div className="grid gap-4">
         <div className="flex justify-between items-center">
           <PageTitle title="Users Management" />
-          <UsersDialogButton />
+          <AddUsersButton />
         </div>
         {data.length === 0 ? (
           <EmptyPlaceholder />

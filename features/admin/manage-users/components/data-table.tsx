@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -9,7 +10,11 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+
+// Components
+import EmptyPlaceholder from "@/components/empty-placeholder";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -18,9 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import EmptyPlaceholder from "@/components/empty-placeholder";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -46,20 +48,15 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
-        <div className="w-full flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-green-800">Users List</h3>
-          <Input
-            placeholder="Filter emails..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-        </div>
-      </div>
+    <div className="grid gap-4">
+      <Input
+        placeholder="Filter emails..."
+        value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn("email")?.setFilterValue(event.target.value)
+        }
+        className="w-full"
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

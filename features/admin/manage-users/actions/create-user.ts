@@ -66,6 +66,11 @@ function validate(
   if (!trimmedEmail) {
     return "Please provide the email";
   }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(trimmedEmail)) {
+    return "Please provide a valid email address";
+  }
   if (!trimmedPassword) {
     return "Please provide the password";
   }

@@ -1,6 +1,9 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
+
+// Components
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 
 export type User = {
   user_id: number;
@@ -18,7 +20,6 @@ export type User = {
   middle_initial?: string;
   suffix?: string;
   email: string;
-  password: string;
   role: "Admin" | "Student" | "Instructor";
 };
 
@@ -30,7 +31,7 @@ export const columns: ColumnDef<User>[] = [
       return (
         <Link
           className="font-medium text-blue-600 underline"
-          href={`/admin/manage-users/${row.original.user_id}`}
+          href={"/admin/manage-users/" + row.original.user_id}
         >
           {row.original.user_id}
         </Link>
@@ -58,10 +59,6 @@ export const columns: ColumnDef<User>[] = [
     header: "Email",
   },
   {
-    accessorKey: "password",
-    header: "Password",
-  },
-  {
     accessorKey: "role",
     header: "Role",
   },
@@ -77,8 +74,7 @@ export const columns: ColumnDef<User>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem>Change password</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
