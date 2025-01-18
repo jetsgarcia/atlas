@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { CircleUserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export default function AppHeader() {
+export default function AppHeader({ headerOnly = false }) {
   const pathname = usePathname();
   const { state, openMobile } = useSidebar();
 
@@ -57,16 +57,20 @@ export default function AppHeader() {
     >
       <div className="flex items-center gap-4">
         {isMobile ? (
-          <SidebarTrigger />
+          <>{!headerOnly && <SidebarTrigger />}</>
         ) : (
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <SidebarTrigger />
-              </TooltipTrigger>
-              <TooltipContent>Toggle Sidebar</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <>
+            {!headerOnly && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <SidebarTrigger />
+                  </TooltipTrigger>
+                  <TooltipContent>Toggle Sidebar</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+          </>
         )}
         <AppLogoHeader
           className={cn(

@@ -16,7 +16,7 @@ export default async function Layout({
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar userType="instructor" />
       <main className="w-full">
-        <AppHeader />
+        <AppHeader headerOnly={true} />
         <div className="p-4">{children}</div>
       </main>
     </SidebarProvider>

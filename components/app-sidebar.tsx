@@ -68,16 +68,6 @@ const studentRecords = [
   },
 ];
 
-// ================================== Instructor Sidebar ==================================
-// Menu items for home
-const instructorHome = [
-  {
-    title: "Subjects",
-    url: "/instructor/subjects",
-    icon: Book,
-  },
-];
-
 interface AppSidebarProps {
   userType: "student" | "admin" | "instructor";
 }
@@ -87,8 +77,6 @@ export function AppSidebar({ userType }: AppSidebarProps) {
     return <StudentSidebar />;
   } else if (userType === "admin") {
     return <AdminSidebar />;
-  } else if (userType === "instructor") {
-    return <InstructorSidebar />;
   }
 }
 
@@ -179,41 +167,6 @@ function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {adminAdministration.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter className="hidden md:flex bg-darkGreen-500 text-white">
-        <div className="flex items-center justify-center gap-x-[.3rem] text-sm text-gray-500  mb-4">
-          <Info size={16} />
-          Toggle Sidebar: Ctrl + B
-        </div>
-      </SidebarFooter>
-    </Sidebar>
-  );
-}
-
-function InstructorSidebar() {
-  return (
-    <Sidebar>
-      <SidebarHeader className="p-4 bg-darkGreen-500 text-white">
-        <AppLogoHeader />
-      </SidebarHeader>
-      <SidebarContent className="px-2 bg-darkGreen-500 text-white">
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-400">Home</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {instructorHome.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
