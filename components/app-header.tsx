@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { CircleUserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export default function AppHeader({ headerOnly = false }) {
+export default function AppHeader({ headerOnly = false, fixed = false }) {
   const pathname = usePathname();
   const { state, openMobile } = useSidebar();
 
@@ -52,7 +52,8 @@ export default function AppHeader({ headerOnly = false }) {
     <div
       className={cn(
         "flex items-center justify-between w-full h-14 pl-4 pr-8 transition-all duration-300",
-        state === "collapsed" || isMobile ? "bg-darkGreen-500 text-white" : ""
+        state === "collapsed" || isMobile ? "bg-darkGreen-500 text-white" : "",
+        fixed === true ? "fixed" : ""
       )}
     >
       <div className="flex items-center gap-4">
