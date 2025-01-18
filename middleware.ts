@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
     }
     if (userType === "Instructor") {
       return NextResponse.redirect(
-        new URL("/instructor/dashboard", request.url)
+        new URL("/instructor/subjects", request.url)
       );
     }
   }
@@ -56,5 +56,10 @@ export function middleware(request: NextRequest) {
 
 // Define the paths this middleware should run on
 export const config = {
-  matcher: ["/student/:path*", "/admin/:path*", "/instructor/:path*", "/"],
+  matcher: [
+    "/student/:path*",
+    "/admin/:path*",
+    "/instructor/subjects/:path*",
+    "/",
+  ],
 };
