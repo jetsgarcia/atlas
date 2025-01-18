@@ -1,14 +1,16 @@
 "use client";
 
-import PageTitle from "@/components/page-title";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import AddVideoButton from "./_components/add-video-button";
-import SubjectVideos from "./_components/subject-videos";
-import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import ManageExam from "./_components/manage-exam";
+
+// Components
+import PageTitle from "@/components/page-title";
+import AddVideoButton from "@/app/_features/instructor/manage-videos/add-video-button";
+import SubjectVideos from "@/app/_features/instructor/manage-videos/subject-videos";
+import ManageExam from "@/app/_features/instructor/manage-videos/manage-exam";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 
 export default function ManageCourseMaterialsPage({
   params,
@@ -35,7 +37,7 @@ export default function ManageCourseMaterialsPage({
               page === 1 && "font-semibold hover:no-underline"
             )}
           >
-            Learning materials
+            Videos
           </Button>
           <Button
             variant="link"

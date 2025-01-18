@@ -1,7 +1,12 @@
 import { ReadAllVideos } from "@/actions/db/read-videos";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+// Components
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
+import { Pencil, Trash } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,9 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Pencil, Trash } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
 interface Video {
   video_id: string;
