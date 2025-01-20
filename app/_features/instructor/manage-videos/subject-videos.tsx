@@ -1,3 +1,5 @@
+"use client";
+
 import { ReadAllVideos } from "@/actions/db/read-videos";
 import Link from "next/link";
 import { useEffect, useState } from "react";
