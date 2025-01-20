@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // Components
@@ -14,6 +14,12 @@ export default function ManageExam({
 }) {
   const [answers, setAnswers] = useState(false);
   const [exam, setExam] = useState(false);
+
+  useEffect(() => {
+    // Fetch data here
+    setAnswers(false);
+    setExam(false);
+  }, []);
 
   return (
     <div>
