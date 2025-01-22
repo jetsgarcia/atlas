@@ -6,6 +6,7 @@ import Link from "next/link";
 // Components
 import { Button } from "@/components/ui/button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
+import StudentCard from "./student-card";
 
 export default function ManageExam({
   params,
@@ -17,7 +18,7 @@ export default function ManageExam({
 
   useEffect(() => {
     // Fetch data here
-    setAnswers(false);
+    setAnswers(true);
     setExam(false);
   }, []);
 
@@ -35,7 +36,14 @@ export default function ManageExam({
           </Link>
         )}
       </div>
-      {answers ? <div>Answers</div> : <EmptyPlaceholder />}
+      {answers ? (
+        <div className="py-6 grid gap-4">
+          <StudentCard name="John Doe" score={87} />
+          <StudentCard name="Abigail Garcia" score={99} />
+        </div>
+      ) : (
+        <EmptyPlaceholder />
+      )}
     </div>
   );
 }

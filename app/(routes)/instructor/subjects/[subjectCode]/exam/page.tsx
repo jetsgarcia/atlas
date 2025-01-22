@@ -1,4 +1,4 @@
-import ManageExam from "@/app/_features/instructor/manage-videos/manage-exam";
+import ManageExam from "@/app/_features/instructor/manage-exam/components/manage-exam";
 
 export default function ExamPage({
   params,

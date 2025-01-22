@@ -1,4 +1,4 @@
-import CreateExam from "@/app/_features/instructor/manage-videos/create-exam";
+import CreateExam from "@/app/_features/instructor/manage-exam/components/create-exam";
 
 export default function CreateExamPage({
   params,
