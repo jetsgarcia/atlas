@@ -13,8 +13,15 @@ interface MCQuestion {
   correctAnswer: string;
 }
 
-export default function MultipleChoice() {
-  const [questions, setQuestions] = useState<MCQuestion[]>([]);
+interface MultipleChoiceProps {
+  questions: MCQuestion[];
+  setQuestions: (questions: MCQuestion[]) => void;
+}
+
+export default function MultipleChoice({
+  questions,
+  setQuestions,
+}: MultipleChoiceProps) {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");

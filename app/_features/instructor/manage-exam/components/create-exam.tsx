@@ -25,6 +25,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+interface MCQuestion {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
+interface EssayQuestion {
+  question: string;
+}
+
 export default function CreateExam({
   params,
 }: {
@@ -33,6 +43,8 @@ export default function CreateExam({
   const [date, setDate] = useState<Date>();
   const [selectedHour, setSelectedHour] = useState("");
   const [duration, setDuration] = useState<number>();
+  const [mcQuestions, setMcQuestions] = useState<MCQuestion[]>([]);
+  const [essayQuestions, setEssayQuestions] = useState<EssayQuestion[]>([]);
 
   const hours = Array.from(
     { length: 24 },
@@ -41,6 +53,11 @@ export default function CreateExam({
 
   function saveExam() {
     console.log(params.subjectCode);
+    console.log(date);
+    console.log(selectedHour);
+    console.log(duration);
+    console.log(mcQuestions);
+    console.log(essayQuestions);
   }
 
   return (
@@ -110,10 +127,13 @@ export default function CreateExam({
         <div className="mt-4">
           <div className="grid gap-2 mb-4">
             <h2 className="font-semibold text-lg">Multiple Choice</h2>
-            <MultipleChoice />
+            <MultipleChoice
+              questions={mcQuestions}
+              setQuestions={setMcQuestions}
+            />
           </div>
           <h2 className="font-semibold text-lg mb-2">Essay</h2>
-          <Essay />
+          <Essay questions={essayQuestions} setQuestions={setEssayQuestions} />
         </div>
       </div>
     </>

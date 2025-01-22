@@ -9,8 +9,12 @@ interface EssayQuestion {
   question: string;
 }
 
-export default function Essay() {
-  const [questions, setQuestions] = useState<EssayQuestion[]>([]);
+interface EssayProps {
+  questions: EssayQuestion[];
+  setQuestions: (questions: EssayQuestion[]) => void;
+}
+
+export default function Essay({ questions, setQuestions }: EssayProps) {
   const [question, setQuestion] = useState("");
 
   function addQuestion() {
