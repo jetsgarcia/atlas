@@ -22,19 +22,31 @@ export default async function Layout({
         <div className="flex gap-6">
           <Link
             href={`/instructor/subjects/${params.subjectCode}/videos`}
-            className="font-normal"
+            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
+             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
+             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
+             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
+             active:scale-95"
           >
             Videos
           </Link>
           <Link
             href={`/instructor/subjects/${params.subjectCode}/exam`}
-            className="font-normal"
+            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
+             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
+             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
+             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
+             active:scale-95"
           >
             Exam
           </Link>
           <Link
             href={`/instructor/subjects/${params.subjectCode}/grades`}
-            className="font-normal"
+            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
+             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
+             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
+             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
+             active:scale-95"
           >
             Grades
           </Link>
