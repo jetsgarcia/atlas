@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import StudentCard from "./student-card";
+import { ReadExam } from "../actions/read-exam";
 
 export default function ManageExam({
   params,
@@ -17,10 +18,13 @@ export default function ManageExam({
   const [exam, setExam] = useState(false);
 
   useEffect(() => {
-    // Fetch data here
+    ReadExam({ subjectCode: params.subjectCode }).then((response) => {
+      if (response.success) {
+        setExam(true);
+      }
+    });
     setAnswers(true);
-    setExam(false);
-  }, []);
+  }, [params.subjectCode]);
 
   return (
     <div>
