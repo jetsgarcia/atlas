@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   if (userType && pathname === "/") {
     // Redirect students to /student, admins to /admin, and instructors to /instructor
     if (userType === "Student") {
-      return NextResponse.redirect(new URL("/student/dashboard", request.url));
+      return NextResponse.redirect(new URL("/student/courses", request.url));
     }
     if (userType === "Admin") {
       return NextResponse.redirect(new URL("/admin/dashboard", request.url));

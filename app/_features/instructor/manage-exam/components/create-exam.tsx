@@ -113,7 +113,7 @@ export default function CreateExam({
         examType: "essay",
         writtenExamId: exam_id,
       });
-
+      console.log(returnedData);
       if (returnedData.success) {
         setEssaySuccess(true);
       }
@@ -123,8 +123,8 @@ export default function CreateExam({
       toast({
         description: "Successfully created new exam",
       });
+      router.push(`/instructor/subjects/${params.subjectCode}/exam`);
     }
-    router.push(`/instructor/subjects/${params.subjectCode}/exam`);
   }
 
   return (
