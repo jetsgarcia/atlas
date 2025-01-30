@@ -40,27 +40,35 @@ export default function ManageExam({
 
   useEffect(() => {
     ReadExam({ subjectCode: params.subjectCode }).then((response) => {
+      console.log(response);
       if (response.success) {
         setExam(true);
       }
     });
 
-    ReadStudentsAfos({ subjectCode: params.subjectCode }).then((response) => {
-      if (response && response.data && Array.isArray(response.data.data)) {
-        const studentSerials: StudentSerial[] = response.data
-          .data as StudentSerial[];
-        setStudentSerial(studentSerials);
+    ReadStudentsAfos({ subjectCode: params.subjectCode }).then(
+      async (response) => {
+        if (response && response.data && Array.isArray(response.data.data)) {
+          const studentSerials: StudentSerial[] = response.data
+            .data as StudentSerial[];
+          setStudentSerial(studentSerials);
 
-        studentSerials.forEach((studentSerial) => {
-          ReadUser({ user_id: studentSerial.user_id }).then((response) => {
-            if (response && response.data && Array.isArray(response.data)) {
-              const student1: Student[] = response.data as Student[];
-              setStudent((prevStudents) => [...prevStudents, ...student1]);
-            }
-          });
-        });
+          // Fetch student data using Promise.all
+          const studentPromises = studentSerials.map((studentSerial) =>
+            ReadUser({ user_id: studentSerial.user_id }).then((res) =>
+              res && res.data && Array.isArray(res.data)
+                ? (res.data as Student[])
+                : []
+            )
+          );
+
+          const studentsArray = await Promise.all(studentPromises);
+          const flattenedStudents: Student[] = studentsArray.flat(); // Flatten the array in case of multiple responses
+
+          setStudent(flattenedStudents);
+        }
       }
-    });
+    );
 
     setAnswers(true);
   }, [params.subjectCode]);
