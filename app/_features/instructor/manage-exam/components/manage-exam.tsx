@@ -29,9 +29,11 @@ type Student = {
 };
 
 export default function ManageExam({
-  params,
+  afosCode,
+  subjectCode,
 }: {
-  params: { subjectCode: string };
+  afosCode: string;
+  subjectCode: string;
 }) {
   const [answers, setAnswers] = useState(false);
   const [exam, setExam] = useState(false);
@@ -39,50 +41,48 @@ export default function ManageExam({
   const [student, setStudent] = useState<Student[]>([]);
 
   useEffect(() => {
-    ReadExam({ subjectCode: params.subjectCode }).then((response) => {
+    ReadExam({ subjectCode: subjectCode }).then((response) => {
       console.log(response);
       if (response.success) {
         setExam(true);
       }
     });
 
-    ReadStudentsAfos({ subjectCode: params.subjectCode }).then(
-      async (response) => {
-        if (response && response.data && Array.isArray(response.data.data)) {
-          const studentSerials: StudentSerial[] = response.data
-            .data as StudentSerial[];
-          setStudentSerial(studentSerials);
+    ReadStudentsAfos({ subjectCode: subjectCode }).then(async (response) => {
+      if (response && response.data && Array.isArray(response.data.data)) {
+        const studentSerials: StudentSerial[] = response.data
+          .data as StudentSerial[];
+        setStudentSerial(studentSerials);
 
-          // Fetch student data using Promise.all
-          const studentPromises = studentSerials.map((studentSerial) =>
-            ReadUser({ user_id: studentSerial.user_id }).then((res) =>
-              res && res.data && Array.isArray(res.data)
-                ? (res.data as Student[])
-                : []
-            )
-          );
+        // Fetch student data using Promise.all
+        const studentPromises = studentSerials.map((studentSerial) =>
+          ReadUser({ user_id: studentSerial.user_id }).then((res) =>
+            res && res.data && Array.isArray(res.data)
+              ? (res.data as Student[])
+              : []
+          )
+        );
 
-          const studentsArray = await Promise.all(studentPromises);
-          const flattenedStudents: Student[] = studentsArray.flat(); // Flatten the array in case of multiple responses
+        const studentsArray = await Promise.all(studentPromises);
+        const flattenedStudents: Student[] = studentsArray.flat(); // Flatten the array in case of multiple responses
 
-          setStudent(flattenedStudents);
-        }
+        setStudent(flattenedStudents);
       }
-    );
+    });
 
     setAnswers(true);
-  }, [params.subjectCode]);
+  }, [subjectCode]);
 
   return (
     <div>
       <div className="flex justify-between items-center">
         <h2 className="font-semibold text-lg">List of answers of students</h2>
         {exam ? (
-          <Link href={`/instructor/subjects/${params.subjectCode}/exam/view`}>
+          <Link href={`/instructor/subjects/${afosCode}/exam/view`}>
             <Button>View exam</Button>
           </Link>
         ) : (
-          <Link href={`/instructor/subjects/${params.subjectCode}/exam/create`}>
+          <Link href={`/instructor/subjects/${afosCode}/exam/create`}>
             <Button>Create exam</Button>
           </Link>
         )}

@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import CreateWrittenScore from "../actions/create-written-score";
+import { useRouter } from "next/navigation";
 
 interface Answer {
   essay_answer_id: number;
@@ -22,13 +24,15 @@ interface Question {
 export default function Students({
   essayQuestions,
   essayAnswers,
+  subjectCode,
 }: {
   essayQuestions: Question[];
   essayAnswers: Answer[];
+  subjectCode: string;
 }) {
+  const router = useRouter();
   const [grades, setGrades] = useState<{ [key: number]: number }>({});
 
-  // Handle grade input change
   const handleGradeChange = (questionId: number, value: string) => {
     setGrades((prevGrades) => ({
       ...prevGrades,
@@ -36,15 +40,24 @@ export default function Students({
     }));
   };
 
-  // Handle form submission
   const handleSubmit = () => {
-    console.log("Submitted Scores:");
+    let totalScore = 0;
     essayQuestions.forEach((question) => {
-      console.log(
-        `Question ${question.item_number}: ${
-          grades[question.exam_question_id] || 0
-        }`
-      );
+      grades[question.exam_question_id] =
+        grades[question.exam_question_id] || 0;
+      totalScore += grades[question.exam_question_id];
+    });
+
+    CreateWrittenScore({
+      studentSerial: essayAnswers[0].student_serial,
+      writtenExam: essayQuestions[0].written_exam,
+      essayScore: totalScore,
+    }).then((response) => {
+      if (response.success) {
+        router.push(`/instructor/subjects/${subjectCode}/exam`);
+      } else {
+        alert("An error occurred. Please try again later");
+      }
     });
   };
 

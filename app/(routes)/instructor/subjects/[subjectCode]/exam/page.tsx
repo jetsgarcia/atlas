@@ -1,9 +1,21 @@
+import { ReadSubjectCode } from "@/app/_features/instructor/manage-exam/actions/read-subject-code";
 import ManageExam from "@/app/_features/instructor/manage-exam/components/manage-exam";
+import { cookies } from "next/headers";
 
-export default function ExamPage({
+export default async function ExamPage({
   params,
 }: {
-  params: { subjectCode: string };
+  params: { afosCode: string };
 }) {
-  return <ManageExam params={{ subjectCode: params.subjectCode }} />;
+  const cookieStore = cookies();
+  const userId = Number(cookieStore.get("userId")?.value);
+
+  const subjectCode = await ReadSubjectCode({ userId: userId });
+
+  return (
+    <ManageExam
+      afosCode={params.afosCode}
+      subjectCode={subjectCode.data ? subjectCode.data[0].subject_code : ""}
+    />
+  );
 }

@@ -74,7 +74,7 @@ interface Question {
 export default async function CheckEssayPage({
   params,
 }: {
-  params: { serialNumber: string };
+  params: { serialNumber: string; subjectCode: string };
 }) {
   const cookieStore = cookies();
   const userId = Number(cookieStore.get("userId")?.value);
@@ -100,5 +100,11 @@ export default async function CheckEssayPage({
     questionId,
   });
 
-  return <Students essayQuestions={essayQuestions} essayAnswers={data} />;
+  return (
+    <Students
+      essayQuestions={essayQuestions}
+      essayAnswers={data}
+      subjectCode={params.subjectCode}
+    />
+  );
 }
