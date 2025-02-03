@@ -2,6 +2,7 @@ import Link from "next/link";
 
 // Components
 import { ChevronLeft } from "lucide-react";
+import ManageSubjectLinks from "@/app/_features/instructor/subject-list/manage-subject-links";
 
 export default async function Layout({
   params,
@@ -19,38 +20,7 @@ export default async function Layout({
           </Link>
           <h2 className="text-2xl font-semibold">{params.subjectCode}</h2>
         </div>
-        <div className="flex gap-6">
-          <Link
-            href={`/instructor/subjects/${params.subjectCode}/videos`}
-            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
-             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
-             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
-             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
-             active:scale-95"
-          >
-            Videos
-          </Link>
-          <Link
-            href={`/instructor/subjects/${params.subjectCode}/exam`}
-            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
-             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
-             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
-             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
-             active:scale-95"
-          >
-            Exam
-          </Link>
-          <Link
-            href={`/instructor/subjects/${params.subjectCode}/grades`}
-            className="relative px-4 py-2 text-gray-700 transition duration-300 ease-in-out 
-             before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 
-             before:bg-darkGreen-600 before:scale-x-0 before:transition-transform 
-             before:duration-300 hover:text-darkGreen-600 hover:before:scale-x-100 
-             active:scale-95"
-          >
-            Grades
-          </Link>
-        </div>
+        <ManageSubjectLinks subjectCode={params.subjectCode.toString()} />
       </div>
       <div>{children}</div>
     </div>

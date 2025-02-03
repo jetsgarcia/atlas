@@ -100,7 +100,7 @@ export default function ManageExam({
                 key={studentSerial.serial_number}
                 name={`${student1.first_name} ${student1.last_name}`}
                 serialNumber={studentSerial.serial_number}
-                subjectCode={studentSerial.afos_code}
+                subjectCode={subjectCode}
                 score={0}
               />
             );
