@@ -3,7 +3,7 @@
 import { ReadVideos } from "@/actions/db/read-video";
 import Loader from "@/components/loader";
 import { Input } from "@/components/ui/input";
-import { ChevronLeft, SendHorizonal } from "lucide-react";
+import { ChevronLeft, SendHorizontal } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -78,7 +78,7 @@ export default function WatchVideoPage({
             <div></div>
             <div className=" flex absolute bottom-0 w-full items-center gap-2 pr-2">
               <Input type="text" placeholder="Ask chatbot..." />
-              <SendHorizonal className="hover:cursor-pointer" />
+              <SendHorizontal className="hover:cursor-pointer" />
             </div>
           </div>
         </div>
