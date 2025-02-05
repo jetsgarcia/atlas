@@ -1,9 +1,9 @@
 "use client";
 
 import { ReadVideos } from "@/actions/db/read-video";
+import Chatbot from "@/app/_features/student/courses/video/components/chatbot";
 import Loader from "@/components/loader";
-import { Input } from "@/components/ui/input";
-import { ChevronLeft, SendHorizontal } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -71,16 +71,7 @@ export default function WatchVideoPage({
             </video>
             <p>Description: {video[0].description}</p>
           </div>
-          <div className="w-1/4 border relative rounded">
-            <h2 className="text-center bg-darkGreen-400 py-2 text-white">
-              Chatbot
-            </h2>
-            <div></div>
-            <div className=" flex absolute bottom-0 w-full items-center gap-2 pr-2">
-              <Input type="text" placeholder="Ask chatbot..." />
-              <SendHorizontal className="hover:cursor-pointer" />
-            </div>
-          </div>
+          <Chatbot />
         </div>
       )}
     </div>

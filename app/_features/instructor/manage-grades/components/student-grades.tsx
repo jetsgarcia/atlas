@@ -78,7 +78,10 @@ export default function StudentGrades({
         <TableBody>
           {students.map((student) => {
             const total =
-              student.score + (practicalScores[student.serial_number] || 0);
+              practicalScores[student.serial_number] > 0
+                ? (student.score / 100) * 40 +
+                  (practicalScores[student.serial_number] / 100) * 60
+                : student.score;
             return (
               <TableRow key={student.serial_number}>
                 <TableCell>{student.serial_number}</TableCell>
@@ -98,7 +101,7 @@ export default function StudentGrades({
                     }
                   />
                 </TableCell>
-                <TableCell>{total}</TableCell>
+                <TableCell>{total.toFixed(0)}</TableCell>
               </TableRow>
             );
           })}
