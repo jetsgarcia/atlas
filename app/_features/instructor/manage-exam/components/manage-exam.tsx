@@ -28,13 +28,7 @@ type Student = {
   role: "Student" | "Instructor" | "Admin";
 };
 
-export default function ManageExam({
-  afosCode,
-  subjectCode,
-}: {
-  afosCode: string;
-  subjectCode: string;
-}) {
+export default function ManageExam({ subjectCode }: { subjectCode: string }) {
   const [answers, setAnswers] = useState(false);
   const [exam, setExam] = useState(false);
   const [studentSerial, setStudentSerial] = useState<StudentSerial[]>([]);
@@ -78,11 +72,11 @@ export default function ManageExam({
       <div className="flex justify-between items-center">
         <h2 className="font-semibold text-lg">List of answers of students</h2>
         {exam ? (
-          <Link href={`/instructor/subjects/${afosCode}/exam/view`}>
+          <Link href={`/instructor/subjects/${subjectCode}/exam/view`}>
             <Button>View exam</Button>
           </Link>
         ) : (
-          <Link href={`/instructor/subjects/${afosCode}/exam/create`}>
+          <Link href={`/instructor/subjects/${subjectCode}/exam/create`}>
             <Button>Create exam</Button>
           </Link>
         )}
