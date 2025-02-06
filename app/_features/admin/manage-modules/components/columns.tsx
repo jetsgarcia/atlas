@@ -29,7 +29,7 @@ export const columns: ColumnDef<Module>[] = [
       return (
         <Link
           className="font-medium text-blue-600 underline"
-          href={`/admin/manage-courses/${row.original.afos_code}/${row.original.module_number}`}
+          href={`/admin/manage-courses/${row.original.afos_code}/${row.original.module_id}`}
         >
           {row.original.module_number}
         </Link>
