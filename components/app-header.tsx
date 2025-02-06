@@ -51,7 +51,7 @@ export default function AppHeader({ headerOnly = false, fixed = false }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between w-full h-14 pl-4 pr-8 transition-all duration-300",
+        "flex items-center justify-between w-full h-14 pl-4 pr-8 transition-all duration-300 z-50",
         state === "collapsed" || isMobile ? "bg-darkGreen-500 text-white" : "",
         fixed === true ? "fixed" : ""
       )}
