@@ -48,8 +48,7 @@ export default function SubjectsList({ userId }: { userId: string }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="flex gap-4">
-          <>
+        <div className="flex gap-4 flex-wrap">
             {subjects.map((record) => (
               <SubjectCard
                 key={record.subject_code}
@@ -57,7 +56,6 @@ export default function SubjectsList({ userId }: { userId: string }) {
                 subjectCode={record.subject_code}
               />
             ))}
-          </>
         </div>
       )}
     </>
