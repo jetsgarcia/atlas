@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { ReadModules } from "@/app/_features/admin/manage-modules/actions/read-module";
 import Link from "next/link";
 
@@ -18,6 +19,7 @@ async function getModules({
   afosCode: string;
 }): Promise<Module[]> {
   try {
+    revalidatePath(`/admin/manage-courses/${afosCode}`);
     const { success, data, message } = await ReadModules({
       afos_code: afosCode,
     });

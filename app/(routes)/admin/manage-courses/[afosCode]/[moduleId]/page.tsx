@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { ReadSubjects } from "@/app/_features/admin/manage-subjects/actions/read-subjects";
 
@@ -13,11 +14,14 @@ import {
 } from "@/app/_features/admin/manage-subjects/components/columns";
 
 async function getSubjects({
+  afosCode,
   moduleId,
 }: {
+  afosCode: string;
   moduleId: number;
 }): Promise<Subject[]> {
   try {
+    revalidatePath(`/admin/manage-courses/${afosCode}/${moduleId}`);
     const { success, data, message } = await ReadSubjects({
       module_id: moduleId,
     });
@@ -38,7 +42,10 @@ export default async function ManageSubjectsPage({
 }: {
   params: { moduleId: number; afosCode: string };
 }) {
-  const data = await getSubjects({ moduleId: params.moduleId });
+  const data = await getSubjects({
+    afosCode: params.afosCode,
+    moduleId: params.moduleId,
+  });
 
   return (
     <div className=" max-w-[80rem] mx-10 xl:mx-auto">

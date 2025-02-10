@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { ReadAllAFOS } from "@/app/_features/admin/manage-courses/actions/read-afos";
 
 // Components
@@ -12,6 +13,7 @@ import { DataTable } from "@/app/_features/admin/manage-courses/components/data-
 
 async function getAllAFOS(): Promise<AFOS[]> {
   try {
+    revalidatePath("/admin/manage-courses");
     const { success, data, message } = await ReadAllAFOS();
     if (success) {
       return data as Array<AFOS>;
