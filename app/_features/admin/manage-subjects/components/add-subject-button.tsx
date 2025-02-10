@@ -101,7 +101,7 @@ export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
             <Input
               id="code"
               className="col-span-3"
-              maxLength={5}
+              maxLength={6}
               onChange={(e) => setSubjectCode(e.target.value.toUpperCase())}
               value={subjectCode}
             />
