@@ -1,57 +1,10 @@
+"use client";
+
 import { ReadEssayAnswers } from "@/app/_features/instructor/manage-exam/actions/read-essay-answers";
 import { ReadExam } from "@/app/_features/instructor/manage-exam/actions/read-exam";
 import Students from "@/app/_features/instructor/manage-exam/components/students";
 import { ReadQuestion } from "@/app/_features/student/assessment/actions/read-question";
-
-async function GetAllQuestions(subjectCode: string) {
-  const response = await ReadExam({ subjectCode });
-  const data = (await GetQuestions({ examId: response.data?.[0].exam_id })) as
-    | Question[]
-    | undefined;
-  return data;
-}
-
-async function GetQuestions({ examId }: { examId: number }) {
-  const response = await ReadQuestion({ examId }).then((response) => {
-    if (response.success) {
-      return response.data;
-    } else {
-      console.log(response.message);
-    }
-  });
-  return response;
-}
-
-async function GetEssayAnswers({
-  serialNumber,
-  questionId,
-}: {
-  serialNumber: number;
-  questionId: number[];
-}) {
-  const essayAnswerList: (Answer | null)[] = await Promise.all(
-    questionId.map(async (id) => {
-      const response = await ReadEssayAnswers({
-        examQuestionId: id,
-        studentSerial: serialNumber,
-      });
-
-      if (response.data && response.data[0]) {
-        return response.data[0] as Answer;
-      } else {
-        console.error("No data found for exam question id:", id);
-        return null;
-      }
-    })
-  );
-
-  // Filter out null values (if necessary)
-  const filteredEssayAnswers: Answer[] = essayAnswerList.filter(
-    (answer): answer is Answer => answer !== null
-  );
-
-  return filteredEssayAnswers;
-}
+import { useEffect, useState } from "react";
 
 interface Answer {
   essay_answer_id: number;
@@ -69,32 +22,75 @@ interface Question {
   written_exam: number;
 }
 
-export default async function CheckEssayPage({
-  params,
+interface Params {
+  subjectCode: string;
+  serialNumber: string;
+}
+
+async function GetAllQuestions(subjectCode: string): Promise<Question[]> {
+  const response = await ReadExam({ subjectCode });
+  return response.data && response.data.length > 0
+    ? await GetQuestions({ examId: response.data[0].exam_id })
+    : [];
+}
+
+async function GetQuestions({
+  examId,
 }: {
-  params: { serialNumber: string; subjectCode: string };
-}) {
-  const questions = await GetAllQuestions(params.subjectCode);
+  examId: number;
+}): Promise<Question[]> {
+  const response = await ReadQuestion({ examId });
+  return response.success && Array.isArray(response.data)
+    ? (response.data as Question[])
+    : [];
+}
 
-  const essayQuestions: Question[] = [];
-  const questionId: number[] = [];
+async function GetEssayAnswers({
+  serialNumber,
+  questionId,
+}: {
+  serialNumber: number;
+  questionId: number[];
+}): Promise<Answer[]> {
+  const essayAnswerList = await Promise.all(
+    questionId.map(async (id) => {
+      const response = await ReadEssayAnswers({
+        examQuestionId: id,
+        studentSerial: serialNumber,
+      });
+      return response.data?.[0] || null;
+    })
+  );
+  return essayAnswerList.filter((answer): answer is Answer => answer !== null);
+}
 
-  questions?.forEach((answer) => {
-    if (answer.exam_type === "essay") {
-      essayQuestions.push(answer);
-      questionId.push(answer.exam_question_id);
+export default function CheckEssayPage({ params }: { params: Params }) {
+  const [essayQuestions, setEssayQuestions] = useState<Question[]>([]);
+  const [essayAnswers, setEssayAnswers] = useState<Answer[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const questions = await GetAllQuestions(params.subjectCode);
+      const filteredQuestions = questions.filter(
+        (q) => q.exam_type === "essay"
+      );
+      const questionId = filteredQuestions.map((q) => q.exam_question_id);
+
+      setEssayQuestions(filteredQuestions);
+      const answers = await GetEssayAnswers({
+        serialNumber: Number(params.serialNumber),
+        questionId,
+      });
+      setEssayAnswers(answers);
     }
-  });
 
-  const data = await GetEssayAnswers({
-    serialNumber: Number(params.serialNumber),
-    questionId,
-  });
+    fetchData();
+  }, [params.subjectCode, params.serialNumber]);
 
   return (
     <Students
       essayQuestions={essayQuestions}
-      essayAnswers={data}
+      essayAnswers={essayAnswers}
       subjectCode={params.subjectCode}
     />
   );
