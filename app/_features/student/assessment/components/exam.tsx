@@ -92,11 +92,12 @@ export default function Exam({
     console.log(response);
 
     setScore(correctCount);
+    console.log(score);
   };
 
   return (
     <>
-      {score ? (
+      {score !== null && score > 0 ? (
         <div className="flex flex-col justify-center items-center py-64">
           <div className="bg-white shadow-md rounded-lg p-6 w-80 md:w-96 text-center">
             <h3 className="text-2xl font-semibold text-gray-800">
