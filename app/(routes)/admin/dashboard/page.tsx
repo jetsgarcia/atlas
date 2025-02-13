@@ -1,3 +1,9 @@
+import EmptyPlaceholder from "@/components/empty-placeholder";
+
 export default function AdminDashboardPage() {
-  return <div></div>;
+  return (
+    <div className="-mt-28">
+      <EmptyPlaceholder />
+    </div>
+  );
 }
