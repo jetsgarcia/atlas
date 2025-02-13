@@ -1,9 +1,7 @@
 import { ReadEssayAnswers } from "@/app/_features/instructor/manage-exam/actions/read-essay-answers";
 import { ReadExam } from "@/app/_features/instructor/manage-exam/actions/read-exam";
-import { ReadSubjectCode } from "@/app/_features/instructor/manage-exam/actions/read-subject-code";
 import Students from "@/app/_features/instructor/manage-exam/components/students";
 import { ReadQuestion } from "@/app/_features/student/assessment/actions/read-question";
-import { cookies } from "next/headers";
 
 async function GetAllQuestions(subjectCode: string) {
   const response = await ReadExam({ subjectCode });
@@ -76,14 +74,7 @@ export default async function CheckEssayPage({
 }: {
   params: { serialNumber: string; subjectCode: string };
 }) {
-  const cookieStore = cookies();
-  const userId = Number(cookieStore.get("userId")?.value);
-
-  const response = await ReadSubjectCode({ userId });
-
-  const subjectCode = response.data?.[0]?.subject_code;
-
-  const questions = await GetAllQuestions(subjectCode);
+  const questions = await GetAllQuestions(params.subjectCode);
 
   const essayQuestions: Question[] = [];
   const questionId: number[] = [];
