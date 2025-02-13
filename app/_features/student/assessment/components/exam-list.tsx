@@ -78,6 +78,8 @@ export default function ExamList({
   return (
     <div className="grid gap-2">
       {exams.map((exam) => {
+        console.log(exam.availability.getTime(), Date.now());
+
         const isAvailable =
           exam.availability.getTime() < Date.now() &&
           exam.availability.getTime() + exam.duration * 60 * 60 * 1000 >
