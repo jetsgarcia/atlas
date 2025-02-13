@@ -61,10 +61,11 @@ export default async function ExamList({
   return (
     <div>
       {exams.map((exam) => {
-        const isAvailable =
-          exam.availability.getTime() < Date.now() &&
-          exam.availability.getTime() + exam.duration * 60 * 60 * 1000 >
-            Date.now();
+        const examStart = new Date(exam.availability).getTime();
+        const now = Date.now();
+        const examEnd = examStart + exam.duration * 60 * 60 * 1000;
+
+        const isAvailable = examStart < now && examEnd > now;
 
         return (
           <>
