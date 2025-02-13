@@ -78,19 +78,17 @@ export default function ExamList({
   return (
     <div className="grid gap-2" suppressHydrationWarning>
       {exams.map((exam) => {
+        console.log(exam.availability.getTime());
         const availabilityTime = exam.availability.getTime();
         const currentTime = Date.now();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
 
         console.log(
-          "Start Time (Local):",
-          new Date(availabilityTime).toLocaleString()
+          "Start Time (UTC):",
+          new Date(availabilityTime).toISOString()
         );
-        console.log(
-          "Current Time (Local):",
-          new Date(currentTime).toLocaleString()
-        );
-        console.log("End Time (Local):", new Date(endTime).toLocaleString());
+        console.log("Current Time (UTC):", new Date(currentTime).toISOString());
+        console.log("End Time (UTC):", new Date(endTime).toISOString());
 
         const isAvailable =
           availabilityTime < currentTime && endTime > currentTime;
