@@ -76,7 +76,7 @@ export default function ExamList({
   }
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-2" suppressHydrationWarning>
       {exams.map((exam) => {
         const availabilityTime = exam.availability.getTime();
         const currentTime = Date.now();
