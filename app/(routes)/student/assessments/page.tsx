@@ -10,6 +10,5 @@ export default async function AssessmentPage() {
     return <EmptyPlaceholder />;
   }
 
-  const examList = await ExamList({ afosDesignation });
-  return examList;
+  return <ExamList afosDesignation={afosDesignation} />;
 }
