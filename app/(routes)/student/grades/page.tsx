@@ -54,8 +54,8 @@ export default async function GradesPage() {
         </TableHeader>
         <TableBody>
           {Object.entries(groupedScores).map(([subject, scores]) => {
-            const writtenScore = scores[0].written_score;
-            const practicalScore = scores[0].score;
+            const practicalScore = scores[0].written_score;
+            const writtenScore = scores[0].score;
 
             // Calculate total based on practical score being zero or not
             const totalScore =
