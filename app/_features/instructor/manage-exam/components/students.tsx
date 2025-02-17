@@ -82,11 +82,11 @@ export default function Students({
               className="w-20 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none mr-4"
             />
             <div className="flex-1">
-              <h1 className="text-lg font-semibold text-gray-900 mb-2">
+              <h1 className="text-md text-gray-700 break-words">
                 {question.item_number}. {question.question}
               </h1>
               {answer && (
-                <h2 className="text-md text-gray-700 mb-3 break-words">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">
                   Answer: {answer.answer_text}
                 </h2>
               )}
