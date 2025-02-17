@@ -7,8 +7,6 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  // Persist the sidebar state across page reloads and server-side rendering
-
   return (
     <SidebarProvider defaultOpen={false}>
       <AppSidebar userType="instructor" />
