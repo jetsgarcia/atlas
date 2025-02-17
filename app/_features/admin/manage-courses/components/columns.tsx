@@ -45,6 +45,16 @@ export const columns: ColumnDef<AFOS>[] = [
     header: "Name",
     enableResizing: true,
     size: 1,
+    cell: ({ row }) => {
+      return (
+        <Link
+          className="font-medium text-blue-600 underline"
+          href={`/admin/manage-courses/${row.original.afos_code}`}
+        >
+          {row.original.afos}
+        </Link>
+      );
+    },
   },
   {
     id: "actions",
