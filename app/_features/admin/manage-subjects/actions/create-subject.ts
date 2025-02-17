@@ -24,7 +24,7 @@ export default async function CreateSubject(values: {
   try {
     // Insert new subject record into the database
     await sql`INSERT INTO Subjects (subject_code, subject, module_id) VALUES (${trimmedSubjectCode}, ${trimmedSubject}, ${moduleId})`;
-    return { success: true, message: "Successfully added new AFOS" };
+    return { success: true, message: "Successfully added new subject" };
   } catch (error: unknown) {
     return {
       success: false,
