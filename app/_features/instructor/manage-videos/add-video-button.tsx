@@ -15,7 +15,7 @@ export default function AddVideoButton({
   return (
     <Button
       onClick={() => {
-        router.push(`/instructor/subjects/${subjectCode}/video/upload-video`);
+        router.push(`/instructor/subjects/${subjectCode}/videos/upload-video`);
       }}
     >
       <Plus />
