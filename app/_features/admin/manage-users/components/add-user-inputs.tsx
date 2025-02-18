@@ -118,9 +118,9 @@ export default function AddUserInputs({
   return (
     <>
       <div className="grid gap-4 py-4">
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="level" className="w-2/5">
-            Level
+            Role
           </Label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -166,7 +166,7 @@ export default function AddUserInputs({
           </DropdownMenu>
         </div>
         {role == "Student" && (
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <Label htmlFor="serial-number" className="w-2/5">
               Serial number<span className="text-red-400">*</span>
             </Label>
@@ -178,7 +178,7 @@ export default function AddUserInputs({
             />
           </div>
         )}
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="last-name" className="w-2/5">
             Last name<span className="text-red-400">*</span>
           </Label>
@@ -189,7 +189,7 @@ export default function AddUserInputs({
             value={lastName}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="first-name" className="w-2/5">
             First name<span className="text-red-400">*</span>
           </Label>
@@ -200,7 +200,7 @@ export default function AddUserInputs({
             value={firstName}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="middle-initial" className="w-2/5">
             Middle initial
           </Label>
@@ -212,7 +212,7 @@ export default function AddUserInputs({
             value={middleInitial}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="suffix" className="w-2/5">
             Suffix
           </Label>
@@ -223,7 +223,7 @@ export default function AddUserInputs({
             value={suffix}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="email" className="w-2/5">
             Email<span className="text-red-400">*</span>
           </Label>
@@ -234,7 +234,7 @@ export default function AddUserInputs({
             value={email}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Label htmlFor="password" className="w-2/5">
             Password<span className="text-red-400">*</span>
           </Label>
@@ -246,7 +246,7 @@ export default function AddUserInputs({
           />
         </div>
         {role == "Student" && (
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <Label htmlFor="afos" className="w-2/5">
               AFOS<span className="text-red-400">*</span>
             </Label>
