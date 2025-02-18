@@ -34,7 +34,7 @@ export default function ManageVideosPage({
       className="max-w-[40rem] m-auto grid gap-4"
     >
       <div className="flex items-center gap-4">
-        <Link href={`/instructor/subjects/${params.subjectCode}`}>
+        <Link href={`/instructor/subjects/${params.subjectCode}/videos`}>
           <ChevronLeft />
         </Link>
         <h1 className="text-2xl font-bold">Upload Video</h1>
