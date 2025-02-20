@@ -71,7 +71,7 @@ export default function Exam({
     mcQuestions.forEach((question) => {
       const selectedAnswer = selectedAnswers[question.exam_question_id];
       if (selectedAnswer === question.correct_answer) {
-        correctCount += 1;
+        correctCount += 5;
       }
     });
 
@@ -101,7 +101,10 @@ export default function Exam({
         <div className="flex flex-col justify-center items-center py-64">
           <div className="bg-white shadow-md rounded-lg p-6 w-80 md:w-96 text-center">
             <h3 className="text-2xl font-semibold text-gray-800">
-              Multiple Choice Score: {score} / {mcQuestions.length}
+              Multiple Choice Score:
+              <div>
+                {score} / {mcQuestions.length * 5}
+              </div>
             </h3>
             <p className="mt-4 text-sm text-gray-600">
               The essay answers will be graded shortly. You can review them
