@@ -69,8 +69,8 @@ export default function ManageExam({ subjectCode }: { subjectCode: string }) {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-lg">List of answers of students</h2>
+      <div className="flex justify-between items-end">
+        <h2 className="font-semibold text-lg">List of students</h2>
         {exam ? (
           <Link href={`/instructor/subjects/${subjectCode}/exam/view`}>
             <Button>View exam</Button>
@@ -82,7 +82,7 @@ export default function ManageExam({ subjectCode }: { subjectCode: string }) {
         )}
       </div>
       {answers ? (
-        <div className="py-6 grid gap-4">
+        <div className="pb-6 pt-3 grid gap-4">
           {studentSerial.map((studentSerial) => {
             const student1 = student.find(
               (student) => student.user_id === studentSerial.user_id
@@ -95,7 +95,6 @@ export default function ManageExam({ subjectCode }: { subjectCode: string }) {
                 name={`${student1.first_name} ${student1.last_name}`}
                 serialNumber={studentSerial.serial_number}
                 subjectCode={subjectCode}
-                score={0}
               />
             );
           })}
