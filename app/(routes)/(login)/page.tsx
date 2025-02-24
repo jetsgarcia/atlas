@@ -1,17 +1,21 @@
-import Banner from "@/app/_features/login/components/banner";
+import Image from "next/image";
 import LoginForm from "@/app/_features/login/components/login-form";
 
 export default function LoginPage() {
   return (
     <div className="flex h-screen">
-      <div className="hidden sm:w-[40%] sm:bg-darkGreen-500 sm:grid sm:place-items-center">
-        <Banner
-          wrapperClassName="text-white text-center flex flex-col gap-4"
-          width={175}
-          height={175}
-          headerClassName="text-xl"
-          paragraphClassName="text-3xl font-extrabold"
-        />
+      <div className="w-[40%] bg-darkGreen-500 grid place-items-center">
+        <div className="text-white text-center flex flex-col gap-4">
+          <Image
+            className="m-auto"
+            src="/logo/army_logo_3000x3000.png"
+            alt="Philippine Army Logo"
+            width={175}
+            height={175}
+          />
+          <h1 className="text-xl">Philippine Army</h1>
+          <p className="text-3xl font-extrabold">Combined Arms Center</p>
+        </div>
       </div>
       <div className="sm:w-[60%] sm:mt-0 w-full sm:grid sm:justify-normal sm:place-items-center flex justify-center mt-20">
         <div className="w-[80%] sm:w-[60%]">
@@ -20,13 +24,6 @@ export default function LoginPage() {
             <p className="hidden sm:block sm:text-xl">
               Enter your credentials to continue
             </p>
-            <Banner
-              wrapperClassName="sm:hidden text-center flex flex-col gap-2 mb-4"
-              width={120}
-              height={120}
-              headerClassName="mt-4"
-              paragraphClassName="text-lg font-bold"
-            />
           </div>
           <LoginForm />
         </div>
