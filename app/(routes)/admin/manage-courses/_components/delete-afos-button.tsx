@@ -4,7 +4,7 @@ import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 // Components
-import DeleteAFOS from "@/app/_features/admin/manage-courses/actions/delete-afos";
+import DeleteAFOS from "@/app/(routes)/admin/manage-courses/_actions/delete-afos";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export default function DeleteAFOSButton({ afosCode }: { afosCode: string }) {

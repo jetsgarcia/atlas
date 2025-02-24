@@ -1,15 +1,15 @@
 import { revalidatePath } from "next/cache";
-import { ReadAllAFOS } from "@/app/_features/admin/manage-courses/actions/read-afos";
+import { ReadAllAFOS } from "@/app/(routes)/admin/manage-courses/_actions/read-afos";
 
 // Components
 import PageTitle from "@/components/page-title";
-import AddAFOSButton from "@/app/_features/admin/manage-courses/components/add-afos-button";
+import AddAFOSButton from "@/app/(routes)/admin/manage-courses/_components/add-afos-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import {
   AFOS,
   columns,
-} from "@/app/_features/admin/manage-courses/components/columns";
-import { DataTable } from "@/app/_features/admin/manage-courses/components/data-table";
+} from "@/app/(routes)/admin/manage-courses/_components/columns";
+import { DataTable } from "@/app/(routes)/admin/manage-courses/_components/data-table";
 
 async function getAllAFOS(): Promise<AFOS[]> {
   try {
