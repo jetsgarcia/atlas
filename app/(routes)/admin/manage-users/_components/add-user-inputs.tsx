@@ -2,14 +2,14 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import CreateStudent from "@/app/_features/admin/manage-users/actions/create-student";
-import { ReadUserByEmail } from "@/app/_features/admin/manage-users/actions/read-user";
+import CreateStudent from "@/app/(routes)/admin/manage-users/_actions/create-student";
+import { ReadUserByEmail } from "@/actions/read-user";
 import { useState } from "react";
 
 // Components
 import { Label } from "@/components/ui/label";
 import { ChevronsUpDown } from "lucide-react";
-import CreateUser from "@/app/_features/admin/manage-users/actions/create-user";
+import CreateUser from "@/app/(routes)/admin/manage-users/_actions/create-user";
 import { Input } from "@/components/ui/input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";

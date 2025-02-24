@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadInstructorSubjects } from "@/app/_features/admin/manage-subjects/actions/read-subjects";
+import { ReadInstructorSubjects } from "@/actions/read-subjects";
 import { useEffect, useState } from "react";
 
 // Components
@@ -49,13 +49,13 @@ export default function SubjectsList({ userId }: { userId: string }) {
         <Loader />
       ) : (
         <div className="flex gap-4 flex-wrap">
-            {subjects.map((record) => (
-              <SubjectCard
-                key={record.subject_code}
-                subjectName={record.subject}
-                subjectCode={record.subject_code}
-              />
-            ))}
+          {subjects.map((record) => (
+            <SubjectCard
+              key={record.subject_code}
+              subjectName={record.subject}
+              subjectCode={record.subject_code}
+            />
+          ))}
         </div>
       )}
     </>

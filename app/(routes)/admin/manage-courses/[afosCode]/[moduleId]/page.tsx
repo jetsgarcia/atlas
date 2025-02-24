@@ -1,17 +1,17 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { ReadSubjects } from "@/app/_features/admin/manage-subjects/actions/read-subjects";
+import { ReadSubjects } from "@/actions/read-subjects";
 
 // Components
-import AddSubjectButton from "@/app/_features/admin/manage-subjects/components/add-subject-button";
+import AddSubjectButton from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_components/add-subject-button";
 import PageTitle from "@/components/page-title";
 import EmptyPlaceholder from "@/components/empty-placeholder";
-import { DataTable } from "@/app/_features/admin/manage-subjects/components/data-table";
+import { DataTable } from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_components/data-table";
 import { ChevronLeft } from "lucide-react";
 import {
   Subject,
   columns,
-} from "@/app/_features/admin/manage-subjects/components/columns";
+} from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_components/columns";
 
 async function getSubjects({
   afosCode,

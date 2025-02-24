@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 // Components
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import DeleteSubject from "@/app/_features/admin/manage-subjects/actions/delete-subject";
+import DeleteSubject from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_actions/delete-subject";
 
 export default function DeleteSubjectButton({
   subjectCode,

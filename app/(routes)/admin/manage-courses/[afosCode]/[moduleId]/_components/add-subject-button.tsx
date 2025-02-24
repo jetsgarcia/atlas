@@ -5,7 +5,7 @@ import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 // Components
-import CreateSubject from "@/app/_features/admin/manage-subjects/actions/create-subject";
+import CreateSubject from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_actions/create-subject";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, X } from "lucide-react";

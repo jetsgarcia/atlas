@@ -9,7 +9,7 @@ import EmptyPlaceholder from "@/components/empty-placeholder";
 import StudentCard from "./student-card";
 import { ReadExam } from "../actions/read-exam";
 import { ReadStudentsAfos } from "../actions/read-student-serial";
-import { ReadUser } from "@/app/_features/admin/manage-users/actions/read-user";
+import { ReadUser } from "@/actions/read-user";
 
 type StudentSerial = {
   serial_number: number;

@@ -1,14 +1,14 @@
 "use client";
 
-import { ReadUser } from "@/app/_features/admin/manage-users/actions/read-user";
+import { ReadUser } from "@/actions/read-user";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // Components
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
-import EditUserButton from "@/app/_features/admin/manage-users/components/edit-user-button";
-import DeleteUserButton from "@/app/_features/admin/manage-users/components/delete-user-button";
+import EditUserButton from "@/app/(routes)/admin/manage-users/_components/edit-user-button";
+import DeleteUserButton from "@/app/(routes)/admin/manage-users/_components/delete-user-button";
 import { ChevronLeft } from "lucide-react";
 import {
   Table,
@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ReadStudent } from "@/app/_features/admin/manage-users/actions/read-student";
+import { ReadStudent } from "@/app/(routes)/admin/manage-users/_actions/read-student";
 
 type User = {
   user_id: number;
