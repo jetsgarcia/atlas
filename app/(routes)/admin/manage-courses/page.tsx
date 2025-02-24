@@ -1,7 +1,5 @@
 import { revalidatePath } from "next/cache";
 import { ReadAllAFOS } from "@/app/(routes)/admin/manage-courses/_actions/read-afos";
-
-// Components
 import PageTitle from "@/components/page-title";
 import AddAFOSButton from "@/app/(routes)/admin/manage-courses/_components/add-afos-button";
 import EmptyPlaceholder from "@/components/empty-placeholder";
