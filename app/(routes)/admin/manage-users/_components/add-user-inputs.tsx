@@ -120,7 +120,7 @@ export default function AddUserInputs({
       <div className="grid gap-4 py-4">
         <div className="flex gap-4 items-center">
           <Label htmlFor="level" className="w-2/5">
-            Role
+            Role<span className="text-red-400">*</span>
           </Label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
