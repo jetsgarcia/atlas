@@ -1,6 +1,6 @@
 "use client";
 
-import { upload } from "@/actions/db/upload";
+import { upload } from "./_actions/upload";
 import SubmitButton from "./_components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

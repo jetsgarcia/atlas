@@ -1,7 +1,7 @@
 // Components
 import PageTitle from "@/components/page-title";
-import AddVideoButton from "@/app/_features/instructor/manage-videos/add-video-button";
-import SubjectVideos from "@/app/_features/instructor/manage-videos/subject-videos";
+import AddVideoButton from "@/app/(routes)/instructor/subjects/[subjectCode]/videos/_components/add-video-button";
+import SubjectVideos from "@/app/(routes)/instructor/subjects/[subjectCode]/videos/_components/subject-videos";
 
 export default function VideosPage({
   params,

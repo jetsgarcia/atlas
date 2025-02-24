@@ -1,10 +1,8 @@
 "use client";
 
-import { ReadAllVideos } from "@/actions/db/read-videos";
+import { ReadAllVideos } from "../_actions/read-videos";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-// Components
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
