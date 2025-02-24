@@ -1,7 +1,7 @@
 "use client";
 
-import { ReadVideos } from "@/actions/db/read-video";
-import Chatbot from "@/app/_features/student/courses/video/components/chatbot";
+import { ReadVideos } from "@/actions/read-video";
+import Chatbot from "@/app/(routes)/student/courses/[moduleId]/[subjectCode]/[videoId]/_components/chatbot";
 import Loader from "@/components/loader";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";

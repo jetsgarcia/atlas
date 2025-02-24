@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadAllVideos } from "../_actions/read-videos";
+import { ReadAllVideos } from "@/actions/read-videos";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import EmptyPlaceholder from "@/components/empty-placeholder";
