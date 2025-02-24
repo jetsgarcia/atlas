@@ -1,16 +1,6 @@
 "use client";
 
 import AppLogoHeader from "./app-logo-header";
-import LogoutButton from "./logout-button";
-import ProfileButton from "./profile-button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import {
   Tooltip,
@@ -20,14 +10,19 @@ import {
 } from "@/components/ui/tooltip";
 import { useClientMediaQuery } from "@/hooks/useClientMediaQuery";
 import { cn } from "@/lib/utils";
-import { CircleUserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { startTransition } from "react";
+import { useRouter } from "next/navigation";
+import { logout } from "@/actions/authentication/logout";
+import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 
 export default function AppHeader({ headerOnly = false, fixed = false }) {
   const pathname = usePathname();
+  const router = useRouter();
+
   const { state, openMobile } = useSidebar();
 
-  // Map of paths to their corresponding titles
   const pathMap: { [key: string]: string } = {
     "/student/dashboard": "Dashboard",
     "/student/courses": "Courses",
@@ -46,7 +41,15 @@ export default function AppHeader({ headerOnly = false, fixed = false }) {
   currentPath = pathMap[currentPath] || "";
 
   const isMobile = useClientMediaQuery("(max-width: 600px)");
-  const size = isMobile ? 22 : 24;
+
+  async function logoutUser() {
+    startTransition(() => {
+      logout().then((response) => {
+        const { redirectURL } = response;
+        router.push(redirectURL);
+      });
+    });
+  }
 
   return (
     <div
@@ -89,22 +92,14 @@ export default function AppHeader({ headerOnly = false, fixed = false }) {
         ) : null}
       </div>
       <div className="flex items-center">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <CircleUserRound size={size} />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="mt-3 mr-7">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuGroup>
-              <DropdownMenuItem className="p-0">
-                <ProfileButton />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="p-0">
-                <LogoutButton />
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button
+          variant="ghost"
+          onClick={logoutUser}
+          className="flex items-center gap-2 p-2 m-0 w-full"
+        >
+          <LogOut />
+          <span>Logout</span>
+        </Button>
       </div>
     </div>
   );
