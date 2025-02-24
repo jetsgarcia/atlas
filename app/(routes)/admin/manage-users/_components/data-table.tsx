@@ -3,6 +3,8 @@
 import { useState } from "react";
 import {
   ColumnDef,
+  SortingState,
+  getSortedRowModel,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
@@ -33,6 +35,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -42,21 +45,34 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     state: {
       columnFilters,
+      sorting,
     },
   });
 
   return (
     <div className="grid gap-4">
-      <Input
-        placeholder="Filter emails..."
-        value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn("email")?.setFilterValue(event.target.value)
-        }
-        className="w-full"
-      />
+      <div className="w-full flex gap-3">
+        <Input
+          placeholder="Filter emails..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="w-full"
+        />
+        <Input
+          placeholder="Filter role..."
+          value={(table.getColumn("role")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("role")?.setFilterValue(event.target.value)
+          }
+          className="w-full"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
