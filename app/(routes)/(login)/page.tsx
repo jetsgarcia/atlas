@@ -17,13 +17,11 @@ export default function LoginPage() {
           <p className="text-3xl font-extrabold">Combined Arms Center</p>
         </div>
       </div>
-      <div className="sm:w-[60%] sm:mt-0 w-full sm:grid sm:justify-normal sm:place-items-center flex justify-center mt-20">
-        <div className="w-[80%] sm:w-[60%]">
+      <div className="w-[60%] mt-0 grid justify-normal place-items-center">
+        <div className="w-[60%]">
           <div className="mb-4 grid gap-2">
-            <p className="hidden sm:block sm:text-3xl sm:font-bold">Login</p>
-            <p className="hidden sm:block sm:text-xl">
-              Enter your credentials to continue
-            </p>
+            <p className="block text-3xl font-bold">Login</p>
+            <p className="block text-xl">Enter your credentials to continue</p>
           </div>
           <LoginForm />
         </div>

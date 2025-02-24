@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form";
 import { startTransition, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Components
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,8 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-// Server actions
 import { login } from "@/app/_features/login/actions/login";
 
 const formSchema = z.object({
