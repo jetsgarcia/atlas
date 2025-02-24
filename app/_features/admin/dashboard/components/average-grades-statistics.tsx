@@ -64,26 +64,43 @@ export default function AverageGradeStatistics() {
   }, []);
 
   return (
-    <div className="space-y-4 flex-grow flex flex-col">
+    <div className="space-y-4 flex-grow flex flex-col w-1/2">
       <div className="bg-white rounded-xl p-8 space-y-2 h-1/2">
         <div>
           <h2 className="text-lg font-semibold">Average Written Exam Score</h2>
-          <p className="text-7xl font-semibold">
-            {averageWrittenScore !== null
-              ? averageWrittenScore.toFixed(2)
-              : "Loading..."}
-          </p>
-          <div className="border-b-4 border-green-700 w-full my-4"></div>
+          {averageWrittenScore !== null ? (
+            <p className="text-7xl font-semibold">
+              {averageWrittenScore.toFixed(2)}
+            </p>
+          ) : (
+            <p className="text-4xl font-semibold">Loading...</p>
+          )}
+          <div
+            className={`border-b-4 border-green-700 w-full my-4 overflow-hidden ${
+              averageWrittenScore !== null
+                ? "transition-all duration-1000 ease-out scale-x-100"
+                : "scale-x-0"
+            } origin-left`}
+          ></div>
         </div>
       </div>
       <div className="bg-white rounded-xl p-8 space-y-2 h-1/2">
         <h2 className="text-lg font-semibold">Average Practical Exam Score</h2>
-        <p className="text-7xl font-semibold">
-          {averagePracticalScore !== null
-            ? averagePracticalScore.toFixed(2)
-            : "Loading..."}
-        </p>
-        <div className="border-b-4 border-green-700 w-full my-4"></div>
+
+        {averagePracticalScore !== null ? (
+          <p className="text-7xl font-semibold">
+            {averagePracticalScore.toFixed(2)}{" "}
+          </p>
+        ) : (
+          <p className="text-4xl font-semibold">Loading...</p>
+        )}
+        <div
+          className={`border-b-4 border-green-700 w-full my-4 overflow-hidden ${
+            averagePracticalScore !== null
+              ? "transition-all duration-1000 ease-out scale-x-100"
+              : "scale-x-0"
+          } origin-left`}
+        ></div>
       </div>
     </div>
   );
