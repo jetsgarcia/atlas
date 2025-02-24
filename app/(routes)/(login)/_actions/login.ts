@@ -13,7 +13,6 @@ export async function login({
   const sql = getDatabaseConnection();
 
   try {
-    // Check if email exists
     const emailFound =
       await sql`SELECT 1 FROM Users WHERE email = ${email} LIMIT 1`;
 
@@ -24,7 +23,6 @@ export async function login({
       };
     }
 
-    // Check if password is correct
     const user =
       await sql`SELECT * FROM Users WHERE email = ${email} AND password = ${password}`;
 
@@ -35,7 +33,6 @@ export async function login({
       };
     }
 
-    // Run this if email and password match
     const userType = user[0].role;
     let redirectURL = "";
 

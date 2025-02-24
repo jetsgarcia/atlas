@@ -17,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { login } from "@/app/_features/login/actions/login";
+import { login } from "@/app/(routes)/(login)/_actions/login";
 
 const formSchema = z.object({
   email: z.string().min(2, "Email required").email("Invalid email format"),
