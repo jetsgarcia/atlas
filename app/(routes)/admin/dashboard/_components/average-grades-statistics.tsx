@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ReadWrittenScoresStatistics } from "../actions/read-written-scores-statistics";
-import { ReadPracticalScoresStatistics } from "../actions/read-practical-scores-statistics";
+import { ReadWrittenScoresStatistics } from "../_actions/read-written-scores-statistics";
+import { ReadPracticalScoresStatistics } from "../_actions/read-practical-scores-statistics";
 
 interface WrittenScore {
   score_id: number;

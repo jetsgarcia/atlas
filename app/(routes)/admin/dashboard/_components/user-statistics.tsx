@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import { ReadUserStatistics } from "../actions/read-user-statistics";
+import { ReadUserStatistics } from "../_actions/read-user-statistics";
 import Loader from "@/components/loader";
 
 const COLORS = ["#154b2e", "#377a55", "#526e5f"];

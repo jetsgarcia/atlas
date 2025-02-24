@@ -1,7 +1,7 @@
 "use client";
 
-import AverageGradeStatistics from "@/app/_features/admin/dashboard/components/average-grades-statistics";
-import UserStatistics from "@/app/_features/admin/dashboard/components/user-statistics";
+import AverageGradeStatistics from "@/app/(routes)/admin/dashboard/_components/average-grades-statistics";
+import UserStatistics from "@/app/(routes)/admin/dashboard/_components/user-statistics";
 
 export default function AdminDashboardPage() {
   return (
