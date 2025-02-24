@@ -1,8 +1,6 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { ReadSubjects } from "@/actions/read-subjects";
-
-// Components
 import AddSubjectButton from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_components/add-subject-button";
 import PageTitle from "@/components/page-title";
 import EmptyPlaceholder from "@/components/empty-placeholder";
