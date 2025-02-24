@@ -2,8 +2,6 @@
 
 import { ReadInstructorSubjects } from "@/actions/read-subjects";
 import { useEffect, useState } from "react";
-
-// Components
 import SubjectCard from "./subject-card";
 import Loader from "@/components/loader";
 

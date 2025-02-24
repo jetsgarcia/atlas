@@ -2,7 +2,7 @@ import Link from "next/link";
 
 // Components
 import { ChevronLeft } from "lucide-react";
-import ManageSubjectLinks from "@/app/_features/instructor/subject-list/manage-subject-links";
+import ManageSubjectLinks from "@/app/(routes)/instructor/subjects/[subjectCode]/_components/manage-subject-links";
 
 export default async function Layout({
   params,

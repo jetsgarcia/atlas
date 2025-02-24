@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import SubjectsList from "@/app/_features/instructor/subject-list/subjects-list";
+import SubjectsList from "@/app/(routes)/instructor/subjects/_components/subjects-list";
 
 export default function SubjectsPage() {
   const cookieStore = cookies();
