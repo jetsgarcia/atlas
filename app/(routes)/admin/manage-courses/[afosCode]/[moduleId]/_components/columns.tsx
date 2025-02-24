@@ -3,16 +3,14 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-
-// Components
 import DeleteSubjectButton from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_components/delete-subject-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import EditSubjectButton from "./edit-subject-button";
 
 export type Subject = {
   subject_code: string;
@@ -56,7 +54,7 @@ export const columns: ColumnDef<Subject>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <EditSubjectButton />
             <DeleteSubjectButton subjectCode={row.original.subject_code} />
           </DropdownMenuContent>
         </DropdownMenu>
