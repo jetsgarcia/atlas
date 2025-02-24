@@ -54,7 +54,11 @@ export const columns: ColumnDef<Subject>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <EditSubjectButton subjectCode={row.original.subject_code} />
+            <EditSubjectButton
+              subjectCode={row.original.subject_code}
+              subjectName={row.original.subject}
+              instructor={row.original.instructor}
+            />
             <DeleteSubjectButton subjectCode={row.original.subject_code} />
           </DropdownMenuContent>
         </DropdownMenu>
