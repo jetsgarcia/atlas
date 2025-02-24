@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-
-// Components
 import CreateSubject from "@/app/(routes)/admin/manage-courses/[afosCode]/[moduleId]/_actions/create-subject";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -42,7 +40,6 @@ export default function AddSubjectButton({ moduleId }: { moduleId: number }) {
           description: response.message,
         });
 
-        // Reset form
         setSubjectName("");
         setSubjectCode("");
         setIsDialogOpen(false);
