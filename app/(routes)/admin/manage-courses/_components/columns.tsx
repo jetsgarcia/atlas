@@ -47,10 +47,7 @@ export const columns: ColumnDef<AFOS>[] = [
     size: 1,
     cell: ({ row }) => {
       return (
-        <Link
-          className="font-medium text-blue-600 underline"
-          href={`/admin/manage-courses/${row.original.afos_code}`}
-        >
+        <Link href={`/admin/manage-courses/${row.original.afos_code}`}>
           {row.original.afos}
         </Link>
       );
