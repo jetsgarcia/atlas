@@ -5,8 +5,36 @@ import { Input } from "@/components/ui/input";
 import { useChat } from "ai/react";
 import { Bot, MessageCircle, SendHorizontal } from "lucide-react";
 
-export default function Chatbot() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+export default function Chatbot({
+  videoTitle,
+  videoDescription,
+}: {
+  videoTitle: string;
+  videoDescription: string;
+}) {
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit: originalHandleSubmit,
+  } = useChat({
+    initialMessages: [
+      {
+        id: "system-1",
+        role: "system",
+        content: `You are a Philippine Army instructor. Only answer questions strictly related to the military, especially topics relevant to the Philippine Army. Ignore any other interpretations, even if the question is vague.\n\nUse the following video information for context:\nVideo Title: ${videoTitle}\nVideo Description: ${videoDescription}`,
+      },
+    ],
+  });
+
+  // Submit without modifying user input
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    // Directly submit the user's question without adding the context
+    originalHandleSubmit(e);
+  };
 
   return (
     <div className="relative w-[360px] bg-white dark:bg-zinc-800 rounded-lg shadow-lg overflow-hidden flex flex-col">
@@ -20,19 +48,21 @@ export default function Chatbot() {
             <p className="text-lg text-gray-500">No messages yet</p>
           </div>
         ) : (
-          messages.map((m) => (
-            <div key={m.id} className="whitespace-pre-wrap">
-              <div
-                className={`p-2 rounded-lg ${
-                  m.role === "user"
-                    ? "flex justify-end text-right"
-                    : "bg-darkGreen-300 text-white dark:bg-zinc-600 self-start"
-                }`}
-              >
-                {m.content}
+          messages.map((m, index) =>
+            index === 0 ? null : ( // Skip rendering the first message
+              <div key={m.id} className="whitespace-pre-wrap pb-4">
+                <div
+                  className={`p-2 rounded-lg ${
+                    m.role === "user"
+                      ? "flex justify-end text-right"
+                      : "bg-darkGreen-300 text-white dark:bg-zinc-600 self-start"
+                  }`}
+                >
+                  {m.content}
+                </div>
               </div>
-            </div>
-          ))
+            )
+          )
         )}
         <div ref={(el) => el && el.scrollIntoView({ behavior: "smooth" })} />
       </div>

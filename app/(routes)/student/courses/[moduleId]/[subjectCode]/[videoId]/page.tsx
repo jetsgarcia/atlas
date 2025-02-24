@@ -71,7 +71,10 @@ export default function WatchVideoPage({
             </video>
             <p>Description: {video[0].description}</p>
           </div>
-          <Chatbot />
+          <Chatbot
+            videoTitle={video[0].title}
+            videoDescription={video[0].description}
+          />
         </div>
       )}
     </div>
