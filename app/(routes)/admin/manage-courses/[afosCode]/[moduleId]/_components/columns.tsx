@@ -54,7 +54,7 @@ export const columns: ColumnDef<Subject>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <EditSubjectButton />
+            <EditSubjectButton subjectCode={row.original.subject_code} />
             <DeleteSubjectButton subjectCode={row.original.subject_code} />
           </DropdownMenuContent>
         </DropdownMenu>
