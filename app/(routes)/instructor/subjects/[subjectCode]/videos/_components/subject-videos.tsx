@@ -51,7 +51,9 @@ export default function SubjectVideos() {
     <div className="py-5 mx-10 xl:mx-auto">
       <div className="grid gap-4">
         {isLoading ? (
-          <Loader />
+          <div className="h-[calc(100vh-13.3rem)]">
+            <Loader />
+          </div>
         ) : (
           <>
             {video.length === 0 ? (
