@@ -63,9 +63,9 @@ export default function SubjectVideos() {
                 <Table className="border">
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-[160px]">Title</TableHead>
-                      <TableHead className="w-[180px]">Description</TableHead>
-                      <TableHead>URL</TableHead>
+                      <TableHead className="w-[200px]">Title</TableHead>
+                      <TableHead>Description</TableHead>
+                      <TableHead className="w-[180px]">URL</TableHead>
                       <TableHead className="w-[40px]"></TableHead>
                       <TableHead className="w-[40px]"></TableHead>
                     </TableRow>
