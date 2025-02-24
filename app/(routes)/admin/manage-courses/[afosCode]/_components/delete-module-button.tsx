@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 // Components
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import DeleteModule from "@/app/_features/admin/manage-modules/actions/delete-module";
+import DeleteModule from "@/app/(routes)/admin/manage-courses/[afosCode]/_actions/delete-module";
 
 export default function DeleteModuleButton({ moduleId }: { moduleId: number }) {
   const router = useRouter();

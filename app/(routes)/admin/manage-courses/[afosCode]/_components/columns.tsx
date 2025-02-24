@@ -5,7 +5,7 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 
 // Components
-import DeleteModuleButton from "@/app/_features/admin/manage-modules/components/delete-module-button";
+import DeleteModuleButton from "@/app/(routes)/admin/manage-courses/[afosCode]/_components/delete-module-button";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

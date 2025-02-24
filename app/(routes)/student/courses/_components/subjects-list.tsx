@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadModules } from "@/app/_features/admin/manage-modules/actions/read-module";
+import { ReadModules } from "@/app/(routes)/admin/manage-courses/[afosCode]/_actions/read-module";
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
 import Link from "next/link";

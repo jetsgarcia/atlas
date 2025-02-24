@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import CreateModule from "@/app/_features/admin/manage-modules/actions/create-module";
+import CreateModule from "@/app/(routes)/admin/manage-courses/[afosCode]/_actions/create-module";
 
 export default function AddModuleButton({
   afosCode,
