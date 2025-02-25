@@ -46,7 +46,9 @@ export default function ManageSubjectsPage({
   }, [params.moduleId]);
 
   return isLoading ? (
-    <Loader />
+    <div className="h-[calc(100dvh-5.5rem)]">
+      <Loader />
+    </div>
   ) : (
     <div className="grid gap-4">
       <div className="flex items-center gap-2">
