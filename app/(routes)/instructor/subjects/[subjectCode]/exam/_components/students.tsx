@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import CreateWrittenScore from "../_actions/create-written-score";
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 
 interface Answer {
   essay_answer_id: number;
@@ -54,6 +55,9 @@ export default function Students({
       essayScore: totalScore,
     }).then((response) => {
       if (response.success) {
+        toast({
+          description: "Grades submitted successfully",
+        });
         router.push(`/instructor/subjects/${subjectCode}/exam`);
       } else {
         alert("An error occurred. Please try again later");
