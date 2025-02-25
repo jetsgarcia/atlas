@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ReadModules } from "@/app/(routes)/admin/manage-courses/[afosCode]/_actions/read-module";
-import { ReadSubjects } from "@/actions/read-subjects";
 import { ReadExams } from "../_actions/read-exam";
 import Link from "next/link";
 import Loader from "@/components/loader";
+import { ReadAllSubjectsFromAFOS } from "../_actions/read-all-subjects-from-afos";
 
 interface Exam {
   exam_id: number;
@@ -25,30 +24,14 @@ export default function ExamList({
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const subjects: string[] = [];
-        const response = await ReadModules({ afos_code: afosDesignation });
+        const response = await ReadAllSubjectsFromAFOS({
+          afosCode: afosDesignation,
+        });
 
-        if (response.success) {
-          const modules = response.data;
-
-          if (modules) {
-            for (const mod of modules) {
-              const data = await ReadSubjects({ module_id: mod.module_id });
-              const subjectList = data.data;
-
-              if (subjectList) {
-                for (const subject of subjectList) {
-                  subjects.push(subject.subject_code.toString());
-                }
-              }
-            }
-          }
-        } else {
-          console.log(response.message);
-        }
+        const subjects = response.data;
 
         const examResults: Exam[] = [];
-        for (const subject of subjects) {
+        for (const subject of subjects ?? []) {
           const examResponse = await ReadExams({ subjectCode: subject });
           if (examResponse.data && examResponse.data.length > 0) {
             examResults.push({
@@ -86,20 +69,13 @@ export default function ExamList({
           exam.availability.getTime() - 8 * 60 * 60 * 1000;
         const currentTime = new Date().getTime();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
-
-        console.log("Start Time:", new Date(availabilityTime).toLocaleString());
-        console.log("Current Time:", new Date(currentTime).toLocaleString());
-        console.log("End Time:", new Date(endTime).toLocaleString());
-
         const isAvailable =
           availabilityTime < currentTime && endTime > currentTime;
 
-        console.log("Is Exam Available?", isAvailable);
-
         return (
-          <>
+          <div key={exam.exam_id}>
             {isAvailable ? (
-              <Link href={`assessments/${exam.exam_id}`} key={exam.exam_id}>
+              <Link href={`assessments/${exam.exam_id}`}>
                 <div
                   className="flex justify-between items-center bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 border border-gray-200 dark:border-gray-700 
               transition-all duration-300 hover:shadow-xl hover:border-gray-400 dark:hover:border-gray-500 
@@ -118,10 +94,7 @@ export default function ExamList({
                       Duration: {exam.duration} hours
                     </p>
                     <p className="text-gray-500 dark:text-gray-400">
-                      Time:{" "}
-                      {exam.availability.toLocaleTimeString("en-US", {
-                        hour12: false,
-                      })}
+                      Time: {availabilityTime}
                     </p>
                   </div>
                 </div>
@@ -153,7 +126,7 @@ export default function ExamList({
                 </div>
               </div>
             )}
-          </>
+          </div>
         );
       })}
     </div>
