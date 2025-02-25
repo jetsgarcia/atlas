@@ -45,7 +45,9 @@ export default function SubjectsList({
   }, [afosDesignation]);
 
   return isLoading ? (
-    <Loader />
+    <div className="h-[calc(100dvh-5.5rem)]">
+      <Loader />
+    </div>
   ) : (
     <div className="grid gap-4">
       <PageTitle title={`Modules for ${afosDesignation}`} />
