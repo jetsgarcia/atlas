@@ -3,8 +3,6 @@
 import { ReadUser } from "@/actions/read-user";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
-// Components
 import Loader from "@/components/loader";
 import PageTitle from "@/components/page-title";
 import EditUserButton from "@/app/(routes)/admin/manage-users/_components/edit-user-button";
@@ -97,7 +95,9 @@ export default function ManageSubjectsPage({
         </div>
       </div>
       {isLoading ? (
-        <Loader />
+        <div className="h-[calc(100vh-9rem)]">
+          <Loader />
+        </div>
       ) : (
         <div className="flex gap-4">
           <div className="p-5 w-1/3 shadow-md bg-gray-200 grid gap-4 place-items-center rounded-md">
@@ -121,11 +121,13 @@ export default function ManageSubjectsPage({
 	C943.037,973.621,920.691,983.86,896,983.86z"
               />
             </svg>
-            <h3 className="text-2xl font-semibold">
-              {user[0].first_name} {user[0]?.middle_initial || ""}{" "}
-              {user[0]?.middle_initial ? "." : ""} {user[0].last_name}
-            </h3>
-            <p>{user[0].role}</p>
+            <div className="text-center grid gap-2">
+              <h3 className="text-2xl font-semibold">
+                {user[0].first_name} {user[0]?.middle_initial || ""}
+                {user[0]?.middle_initial ? "." : ""} {user[0].last_name}
+              </h3>
+              <p>{user[0].role}</p>
+            </div>
           </div>
           <div className="p-5 w-2/3 shadow-md bg-gray-200 rounded-md flex">
             <Table>
