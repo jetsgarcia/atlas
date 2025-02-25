@@ -61,14 +61,12 @@ export default function GradeList({ userId }: { userId: string }) {
           const writtenScore = scores[0].written_score;
           const practicalScore = scores[0].score;
 
-          console.log(subject);
-          console.log(scores);
-
           // Calculate total based on practical score being zero or not
-          const totalScore =
-            practicalScore > 0
+          const totalScore = writtenScore
+            ? practicalScore > 0
               ? (writtenScore / 100) * 40 + (practicalScore / 100) * 60
-              : writtenScore;
+              : writtenScore
+            : practicalScore;
 
           return (
             <TableRow key={subject}>
