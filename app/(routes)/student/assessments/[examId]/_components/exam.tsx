@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import CreateEssayAnswer from "../_actions/create-essay-answer";
 import { useRouter } from "next/navigation";
-import CreateMCScore from "../_actions/create-mc-score";
+import CreateEssayAnswer from "../../_actions/create-essay-answer";
+import CreateMCScore from "../../_actions/create-mc-score";
 
 interface Question {
   exam_question_id: number;
