@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ReadModules } from "@/app/(routes)/admin/manage-courses/[afosCode]/_actions/read-module";
 import { ReadSubjects } from "@/actions/read-subjects";
-import { ReadExams } from "../actions/read-exam";
+import { ReadExams } from "../../../../(routes)/student/assessments/_actions/read-exam";
 import Link from "next/link";
 import Loader from "@/components/loader";
 

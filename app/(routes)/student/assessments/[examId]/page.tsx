@@ -1,6 +1,6 @@
-import { ReadChoices } from "@/app/_features/student/assessment/actions/read-choice";
-import { ReadQuestion } from "@/app/_features/student/assessment/actions/read-question";
-import { ReadStudentSerial } from "@/app/_features/student/assessment/actions/read-serial-id";
+import { ReadChoices } from "@/app/(routes)/student/assessments/_actions/read-choice";
+import { ReadQuestion } from "@/actions/read-question";
+import { ReadStudentSerial } from "@/app/(routes)/student/assessments/_actions/read-serial-id";
 import Exam from "@/app/_features/student/assessment/components/exam";
 import { cookies } from "next/headers";
 
