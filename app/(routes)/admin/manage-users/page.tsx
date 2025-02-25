@@ -34,7 +34,9 @@ export default async function ManageUsersPage() {
           <AddUsersButton />
         </div>
         {data.length === 0 ? (
-          <EmptyPlaceholder />
+          <div className="w-full">
+            <EmptyPlaceholder />
+          </div>
         ) : (
           <DataTable columns={columns} data={data} />
         )}

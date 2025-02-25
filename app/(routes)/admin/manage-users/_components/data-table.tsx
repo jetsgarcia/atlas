@@ -12,7 +12,6 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import EmptyPlaceholder from "@/components/empty-placeholder";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -82,9 +81,7 @@ export function DataTable<TData, TValue>({
           }}
         >
           <SelectTrigger
-            className={`w-full ${
-              roleSelected ? "text-black" : "text-gray-500"
-            }`}
+            className={`w-1/4 ${roleSelected ? "text-black" : "text-gray-500"}`}
           >
             <SelectValue placeholder="Filter role..." />
           </SelectTrigger>
@@ -136,7 +133,7 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               ))
             ) : (
-              <EmptyPlaceholder />
+              <div className="px-2 py-4">No data found</div>
             )}
           </TableBody>
         </Table>
