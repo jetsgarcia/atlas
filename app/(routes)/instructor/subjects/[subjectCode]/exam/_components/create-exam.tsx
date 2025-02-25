@@ -50,8 +50,6 @@ export default function CreateExam({
   const [duration, setDuration] = useState<number>();
   const [mcQuestions, setMcQuestions] = useState<MCQuestion[]>([]);
   const [essayQuestions, setEssayQuestions] = useState<EssayQuestion[]>([]);
-  const [mcSuccess, setMCSuccess] = useState(false);
-  const [essaySuccess, setEssaySuccess] = useState(false);
   const router = useRouter();
 
   const hours = Array.from(
@@ -63,6 +61,7 @@ export default function CreateExam({
     if (!date || !selectedHour || !duration) {
       return;
     }
+
     const { id } = await CreateExamRecord({
       duration: duration,
       availability: `${format(date, "yyyy-MM-dd")} ${selectedHour}`,
@@ -73,8 +72,12 @@ export default function CreateExam({
       console.error("Failed to create exam record");
       return;
     }
+
     const { exam_id } = id[0];
-    mcQuestions.forEach(async (question, index) => {
+
+    // Handle multiple-choice questions
+    for (let index = 0; index < mcQuestions.length; index++) {
+      const question = mcQuestions[index];
       const returnedData = await CreateQuestion({
         itemNumber: index + 1,
         question: question.question,
@@ -87,25 +90,24 @@ export default function CreateExam({
 
       if (!data || !data.length) {
         console.error("Failed to create question record");
-        return;
+        continue;
       }
 
-      mcQuestions[index].options.forEach(async (option) => {
+      for (const option of question.options) {
         const dataReturned = await CreateChoice({
           choice: option,
           examQuestionId: data[0].exam_question_id,
         });
 
-        if (!dataReturned) {
+        if (!dataReturned || !dataReturned.success) {
           console.error("Failed to create choice record");
         }
+      }
+    }
 
-        if (dataReturned.success) {
-          setMCSuccess(true);
-        }
-      });
-    });
-    essayQuestions.forEach(async (question, index) => {
+    // Handle essay questions
+    for (let index = 0; index < essayQuestions.length; index++) {
+      const question = essayQuestions[index];
       const returnedData = await CreateQuestion({
         itemNumber: index + 1,
         question: question.question,
@@ -113,17 +115,15 @@ export default function CreateExam({
         examType: "essay",
         writtenExamId: exam_id,
       });
-      console.log(returnedData);
-      if (returnedData.success) {
-        setEssaySuccess(true);
-      }
-    });
 
-    if (mcSuccess && essaySuccess) {
-      toast({
-        description: "Successfully created new exam",
-      });
-      router.push(`/instructor/subjects/${params.subjectCode}/exam`);
+      if (returnedData.success) {
+        toast({
+          description: "Successfully created new exam",
+        });
+        router.push(`/instructor/subjects/${params.subjectCode}/exam`);
+      } else {
+        console.error("Failed to save some questions or choices");
+      }
     }
   }
 
