@@ -4,7 +4,7 @@ import { getDatabaseConnection } from "@/lib/db";
 
 type Written = {
   written_exam: number;
-  score: number;
+  written_score: number;
   subject: string;
 };
 
@@ -61,7 +61,7 @@ export async function ReadStudentGrades({ userId }: { userId: string }) {
           await sql`SELECT * FROM StudentWrittenScores WHERE written_exam = ${exam.exam_id} AND student_serial = ${studentSerial[0].serial_number}`;
         return scores.map((score) => ({
           written_exam: score.written_exam,
-          score: score.score,
+          written_score: score.score,
           subject: exam.subject,
         }));
       })
@@ -85,7 +85,7 @@ export async function ReadStudentGrades({ userId }: { userId: string }) {
         combinedScoresMap.set(key, {
           ...combinedScoresMap.get(key),
           written_exam: written.written_exam,
-          written_score: written.score,
+          written_score: written.written_score,
         });
       } else {
         combinedScoresMap.set(key, { ...written });
