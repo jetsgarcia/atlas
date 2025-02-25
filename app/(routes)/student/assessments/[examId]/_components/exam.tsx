@@ -41,6 +41,7 @@ export default function Exam({
     [key: number]: string;
   }>({});
   const [score, setScore] = useState<number | null>(null);
+  const [showScore, setShowScore] = useState(false);
 
   const mcQuestions = questions.filter(
     (question) => question.exam_type === "mc"
@@ -92,12 +93,12 @@ export default function Exam({
     console.log(response);
 
     setScore(correctCount);
-    console.log(score);
+    setShowScore(true);
   };
 
   return (
     <>
-      {score !== null && score > 0 ? (
+      {showScore ? (
         <div className="flex flex-col justify-center items-center py-64">
           <div className="bg-white shadow-md rounded-lg p-6 w-80 md:w-96 text-center">
             <h3 className="text-2xl font-semibold text-gray-800">
