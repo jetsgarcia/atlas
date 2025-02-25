@@ -68,7 +68,9 @@ export default function ExamList({
         const availabilityTime =
           exam.availability.getTime() - 8 * 60 * 60 * 1000;
 
-        const hours24 = Math.floor((availabilityTime / 3600000) % 24);
+        const hours24 = Math.floor(
+          ((availabilityTime + -8 * 60 * 60 * 1000) / 3600000) % 24
+        );
         const minutes = Math.floor((availabilityTime / 60000) % 60);
         const hours12 = hours24 % 12 || 12;
         const period = hours24 >= 12 ? "PM" : "AM";
