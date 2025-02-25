@@ -25,6 +25,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +44,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [roleSelected, setRoleSelected] = useState(false);
 
   const table = useReactTable({
     data,
@@ -64,14 +72,33 @@ export function DataTable<TData, TValue>({
           }
           className="w-full"
         />
-        <Input
-          placeholder="Filter role..."
+        <Select
           value={(table.getColumn("role")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("role")?.setFilterValue(event.target.value)
-          }
-          className="w-full"
-        />
+          onValueChange={(value) => {
+            if (value === "clear") {
+              table.getColumn("role")?.setFilterValue(undefined);
+            } else {
+              table.getColumn("role")?.setFilterValue(value);
+            }
+            setRoleSelected(value !== "clear");
+          }}
+        >
+          <SelectTrigger
+            className={`w-full ${
+              roleSelected ? "text-black" : "text-gray-500"
+            }`}
+          >
+            <SelectValue placeholder="Filter role..." />
+          </SelectTrigger>
+          <SelectContent>
+            {roleSelected && (
+              <SelectItem value="clear">Remove Filter</SelectItem>
+            )}
+            <SelectItem value="instructor">Instructor</SelectItem>
+            <SelectItem value="student">Student</SelectItem>
+            <SelectItem value="admin">Admin</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <div className="rounded-md border">
         <Table>
