@@ -2,8 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-
-// Components
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

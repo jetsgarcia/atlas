@@ -12,8 +12,6 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-// Components
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
