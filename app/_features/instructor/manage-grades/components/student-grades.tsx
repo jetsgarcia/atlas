@@ -12,6 +12,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import CreatePracticalScore from "../actions/create-practical-score";
+import { toast } from "@/hooks/use-toast";
 
 interface Student {
   serial_number: string;
@@ -52,6 +53,12 @@ export default function StudentGrades({
         score: practicalScores[student.serial_number] || 0,
         studentSerial: Number(student.serial_number),
         subjectCode: subjectCode,
+      }).then((res) => {
+        if (res.success) {
+          toast({
+            description: "Grades released successfully",
+          });
+        }
       });
       return {
         serial_number: student.serial_number,
@@ -77,8 +84,6 @@ export default function StudentGrades({
         </TableHeader>
         <TableBody>
           {students.map((student) => {
-            console.log(student);
-
             const total = student.score
               ? (practicalScores[student.serial_number] ?? 0) > 0
                 ? (student.score / 100) * 40 +
