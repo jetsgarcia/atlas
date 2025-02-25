@@ -1,21 +1,32 @@
+"use client";
+
 import Link from "next/link";
 
 // Components
 import { ChevronLeft } from "lucide-react";
 import ManageSubjectLinks from "@/app/(routes)/instructor/subjects/[subjectCode]/_components/manage-subject-links";
+import { usePathname } from "next/navigation";
 
-export default async function Layout({
+export default function Layout({
   params,
   children,
 }: {
   params: { subjectCode: string };
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
     <div>
       <div className="flex items-center gap-10 mb-4">
         <div className="flex items-center gap-4">
-          <Link href="/instructor/subjects">
+          <Link
+            href={
+              pathname.includes("/instructor/subjects/PHYCDN/exam/")
+                ? "/instructor/subjects/PHYCDN/exam"
+                : "/instructor/subjects"
+            }
+          >
             <ChevronLeft />
           </Link>
           <h2 className="text-2xl font-semibold">{params.subjectCode}</h2>
