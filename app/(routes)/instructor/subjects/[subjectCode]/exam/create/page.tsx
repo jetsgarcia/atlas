@@ -1,4 +1,4 @@
-import CreateExam from "@/app/_features/instructor/manage-exam/components/create-exam";
+import CreateExam from "@/app/(routes)/instructor/subjects/[subjectCode]/exam/_components/create-exam";
 
 export default function CreateExamPage({
   params,

@@ -44,7 +44,9 @@ export default function SubjectsList({ userId }: { userId: string }) {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div className="h-[calc(100vh-5rem)]">
+          <Loader />
+        </div>
       ) : (
         <div className="flex gap-4 flex-wrap">
           {subjects.map((record) => (

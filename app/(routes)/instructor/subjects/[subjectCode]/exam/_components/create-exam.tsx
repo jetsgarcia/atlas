@@ -24,9 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CreateExamRecord from "../actions/create-exam";
-import CreateQuestion from "../actions/create-question";
-import CreateChoice from "../actions/create-choice";
+import CreateExamRecord from "../_actions/create-exam";
+import CreateQuestion from "../_actions/create-question";
+import CreateChoice from "../_actions/create-choice";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 

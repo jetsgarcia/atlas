@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import CreateWrittenScore from "../actions/create-written-score";
+import CreateWrittenScore from "../_actions/create-written-score";
 import { useRouter } from "next/navigation";
 
 interface Answer {

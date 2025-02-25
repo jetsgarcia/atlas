@@ -1,8 +1,8 @@
 "use client";
 
-import { ReadEssayAnswers } from "@/app/_features/instructor/manage-exam/actions/read-essay-answers";
-import { ReadExam } from "@/app/_features/instructor/manage-exam/actions/read-exam";
-import Students from "@/app/_features/instructor/manage-exam/components/students";
+import { ReadEssayAnswers } from "@/app/(routes)/instructor/subjects/[subjectCode]/exam/_actions/read-essay-answers";
+import { ReadExam } from "@/app/(routes)/instructor/subjects/[subjectCode]/exam/_actions/read-exam";
+import Students from "@/app/(routes)/instructor/subjects/[subjectCode]/exam/_components/students";
 import { ReadQuestion } from "@/app/_features/student/assessment/actions/read-question";
 import { useEffect, useState } from "react";
 
