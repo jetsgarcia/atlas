@@ -1,7 +1,7 @@
 import { ReadChoices } from "@/app/(routes)/student/assessments/_actions/read-choice";
 import { ReadQuestion } from "@/actions/read-question";
 import { ReadStudentSerial } from "@/app/(routes)/student/assessments/_actions/read-serial-id";
-import Exam from "@/app/_features/student/assessment/components/exam";
+import Exam from "./_components/exam";
 import { cookies } from "next/headers";
 
 async function GetQuestions({ examId }: { examId: number }) {

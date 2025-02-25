@@ -1,4 +1,4 @@
-import ExamList from "@/app/_features/student/assessment/components/exam-list";
+import ExamList from "./_components/exam-list";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import { cookies } from "next/headers";
 
