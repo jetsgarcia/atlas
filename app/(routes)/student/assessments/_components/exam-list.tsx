@@ -67,6 +67,16 @@ export default function ExamList({
       {exams.map((exam) => {
         const availabilityTime =
           exam.availability.getTime() - 8 * 60 * 60 * 1000;
+
+        const hours24 = Math.floor((availabilityTime / 3600000) % 24);
+        const minutes = Math.floor((availabilityTime / 60000) % 60);
+        const hours12 = hours24 % 12 || 12;
+        const period = hours24 >= 12 ? "PM" : "AM";
+
+        const formattedTime = `${hours12.toString().padStart(2, "0")}:${minutes
+          .toString()
+          .padStart(2, "0")} ${period}`;
+
         const currentTime = new Date().getTime();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
         const isAvailable =
@@ -94,7 +104,7 @@ export default function ExamList({
                       Duration: {exam.duration} hours
                     </p>
                     <p className="text-gray-500 dark:text-gray-400">
-                      Time: {availabilityTime}
+                      Time: {formattedTime}
                     </p>
                   </div>
                 </div>
