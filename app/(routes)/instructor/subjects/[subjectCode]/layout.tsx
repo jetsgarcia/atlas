@@ -22,8 +22,8 @@ export default function Layout({
         <div className="flex items-center gap-4">
           <Link
             href={
-              pathname.includes("/instructor/subjects/PHYCDN/exam/")
-                ? "/instructor/subjects/PHYCDN/exam"
+              /^\/instructor\/subjects\/[^/]+\/exam\/[^/]+$/.test(pathname)
+                ? `/instructor/subjects/${pathname.split("/")[3]}/exam`
                 : "/instructor/subjects"
             }
           >
