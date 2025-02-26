@@ -11,7 +11,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import CreatePracticalScore from "../actions/create-practical-score";
+import CreatePracticalScore from "../_actions/create-practical-score";
 import { toast } from "@/hooks/use-toast";
 
 interface Student {

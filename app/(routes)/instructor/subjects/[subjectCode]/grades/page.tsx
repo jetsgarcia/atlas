@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GetStudentList } from "@/app/_features/instructor/manage-grades/actions/read-students-from-subject";
-import StudentGrades from "@/app/_features/instructor/manage-grades/components/student-grades";
+import { GetStudentList } from "@/app/(routes)/instructor/subjects/[subjectCode]/grades/_actions/read-students-from-subject";
+import StudentGrades from "@/app/(routes)/instructor/subjects/[subjectCode]/grades/_components/student-grades";
 import Loader from "@/components/loader";
 
 type Student = {
