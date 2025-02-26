@@ -33,7 +33,7 @@ export default function GradesPage({ params }: GradesPageProps) {
       } catch (err) {
         setError("Failed to fetch student list: " + err);
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     };
 
