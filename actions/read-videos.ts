@@ -2,11 +2,12 @@
 
 import { getDatabaseConnection } from "@/lib/db";
 
-export async function ReadAllVideos() {
+export async function ReadAllVideos({ subjectCode }: { subjectCode: string }) {
   const sql = getDatabaseConnection();
 
   try {
-    const records = await sql`SELECT * FROM Videos`;
+    const records =
+      await sql`SELECT * FROM Videos WHERE subject = ${subjectCode}`;
     if (records.length === 0) {
       return { success: false, message: "No records found" };
     }

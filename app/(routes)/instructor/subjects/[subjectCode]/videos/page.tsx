@@ -14,7 +14,7 @@ export default function VideosPage({
         <PageTitle title="Manage PRL Videos" />
         <AddVideoButton subjectCode={params.subjectCode} />
       </div>
-      <SubjectVideos />
+      <SubjectVideos subjectCode={params.subjectCode} />
     </div>
   );
 }

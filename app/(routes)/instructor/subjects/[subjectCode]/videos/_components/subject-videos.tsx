@@ -23,14 +23,20 @@ interface Video {
   url: string;
 }
 
-export default function SubjectVideos() {
+export default function SubjectVideos({
+  subjectCode,
+}: {
+  subjectCode: string;
+}) {
   const [isLoading, setIsLoading] = useState(true);
   const [video, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
     async function fetchSubjectsData() {
       try {
-        const { success, data, message } = await ReadAllVideos();
+        const { success, data, message } = await ReadAllVideos({
+          subjectCode: subjectCode,
+        });
         if (success) {
           setVideos(data as Array<Video>);
         } else {
