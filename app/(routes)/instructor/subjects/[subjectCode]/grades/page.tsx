@@ -33,14 +33,19 @@ export default function GradesPage({ params }: GradesPageProps) {
       } catch (err) {
         setError("Failed to fetch student list: " + err);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
 
     fetchStudents();
   }, [params.subjectCode]);
 
-  if (loading) return <Loader />;
+  if (loading)
+    return (
+      <div className="h-[calc(100vh-9rem)]">
+        <Loader />;
+      </div>
+    );
   if (error) return <p>{error}</p>;
 
   return (
