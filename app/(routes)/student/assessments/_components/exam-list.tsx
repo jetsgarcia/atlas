@@ -9,7 +9,7 @@ import { ReadAllSubjectsFromAFOS } from "../_actions/read-all-subjects-from-afos
 interface Exam {
   exam_id: number;
   duration: number;
-  availability: string; // Store as an ISO string for consistency
+  availability: string; // Store as ISO string to avoid timezone issues
   subject: string;
 }
 
@@ -34,12 +34,15 @@ export default function ExamList({
         for (const subject of subjects ?? []) {
           const examResponse = await ReadExams({ subjectCode: subject });
           if (examResponse.data && examResponse.data.length > 0) {
+            const rawTime = examResponse.data[0].availability;
+
+            // Ensure JavaScript understands this is already in Philippine time
+            const fixedTime = new Date(rawTime + " GMT+0800").toISOString();
+
             examResults.push({
               exam_id: examResponse.data[0].exam_id,
               duration: examResponse.data[0].duration,
-              availability: new Date(
-                examResponse.data[0].availability + "Z"
-              ).toISOString(), // Force UTC
+              availability: fixedTime,
               subject: examResponse.data[0].subject,
             });
           }
@@ -70,14 +73,21 @@ export default function ExamList({
         const availabilityTime = new Date(exam.availability).getTime();
         const currentTime = new Date().getTime();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
-
         const isAvailable =
           availabilityTime < currentTime && endTime > currentTime;
 
-        // Convert UTC availability to user's local time
-        const formattedTime = new Date(exam.availability).toLocaleTimeString(
+        // Format the time correctly in Philippine time
+        const formattedDate = new Date(exam.availability).toLocaleDateString(
           "en-US",
           {
+            timeZone: "Asia/Manila",
+          }
+        );
+
+        const formattedTime = new Date(exam.availability).toLocaleString(
+          "en-US",
+          {
+            timeZone: "Asia/Manila",
             hour: "2-digit",
             minute: "2-digit",
             hour12: true,
@@ -98,7 +108,7 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date: {new Date(exam.availability).toLocaleDateString()}
+                      Date: {formattedDate}
                     </p>
                   </div>
                   <div>
@@ -122,8 +132,7 @@ export default function ExamList({
                     {exam.subject}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 mt-1">
-                    Date:{" "}
-                    {new Date(exam.availability).toLocaleDateString("en-US")}
+                    Date: {formattedDate}
                   </p>
                 </div>
                 <div>
