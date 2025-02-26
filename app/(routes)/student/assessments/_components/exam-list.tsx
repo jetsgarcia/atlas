@@ -9,7 +9,7 @@ import { ReadAllSubjectsFromAFOS } from "../_actions/read-all-subjects-from-afos
 interface Exam {
   exam_id: number;
   duration: number;
-  availability: Date;
+  availability: string; // Store as an ISO string for consistency
   subject: string;
 }
 
@@ -37,7 +37,9 @@ export default function ExamList({
             examResults.push({
               exam_id: examResponse.data[0].exam_id,
               duration: examResponse.data[0].duration,
-              availability: new Date(examResponse.data[0].availability),
+              availability: new Date(
+                examResponse.data[0].availability + "Z"
+              ).toISOString(), // Force UTC
               subject: examResponse.data[0].subject,
             });
           }
@@ -65,24 +67,22 @@ export default function ExamList({
   return (
     <div className="grid gap-2">
       {exams.map((exam) => {
-        const availabilityTime =
-          exam.availability.getTime() - 8 * 60 * 60 * 1000;
-
-        const hours24 = Math.floor(
-          ((availabilityTime + 8 * 60 * 60 * 1000) / 3600000) % 24
-        );
-        const minutes = Math.floor((availabilityTime / 60000) % 60);
-        const hours12 = hours24 % 12 || 12;
-        const period = hours24 >= 12 ? "PM" : "AM";
-
-        const formattedTime = `${hours12.toString().padStart(2, "0")}:${minutes
-          .toString()
-          .padStart(2, "0")} ${period}`;
-
+        const availabilityTime = new Date(exam.availability).getTime();
         const currentTime = new Date().getTime();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
+
         const isAvailable =
           availabilityTime < currentTime && endTime > currentTime;
+
+        // Convert UTC availability to user's local time
+        const formattedTime = new Date(exam.availability).toLocaleTimeString(
+          "en-US",
+          {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }
+        );
 
         return (
           <div key={exam.exam_id}>
@@ -98,7 +98,7 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date: {exam.availability.toLocaleDateString()}
+                      Date: {new Date(exam.availability).toLocaleDateString()}
                     </p>
                   </div>
                   <div>
@@ -122,7 +122,8 @@ export default function ExamList({
                     {exam.subject}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 mt-1">
-                    Date: {exam.availability.toLocaleDateString("en-US")}
+                    Date:{" "}
+                    {new Date(exam.availability).toLocaleDateString("en-US")}
                   </p>
                 </div>
                 <div>
@@ -130,10 +131,7 @@ export default function ExamList({
                     Duration: {exam.duration} hours
                   </p>
                   <p className="text-gray-500 dark:text-gray-400">
-                    Time:{" "}
-                    {exam.availability.toLocaleTimeString("en-US", {
-                      hour12: false,
-                    })}
+                    Time: {formattedTime}
                   </p>
                 </div>
               </div>
