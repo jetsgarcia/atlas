@@ -99,7 +99,8 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date: {new Date(availabilityTime).toLocaleDateString()}
+                      Date:{" "}
+                      {new Date(availabilityTime).toLocaleDateString("en-US")}
                     </p>
                   </div>
                   <div>
