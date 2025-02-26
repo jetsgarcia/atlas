@@ -51,7 +51,7 @@ export default function SubjectVideos({
       }
     }
     fetchSubjectsData();
-  }, []);
+  }, [subjectCode]);
 
   return (
     <div className="py-5 mx-10 xl:mx-auto">
