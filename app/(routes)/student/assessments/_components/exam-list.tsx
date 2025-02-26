@@ -37,9 +37,7 @@ export default function ExamList({
             examResults.push({
               exam_id: examResponse.data[0].exam_id,
               duration: examResponse.data[0].duration,
-              availability: new Date(
-                examResponse.data[0].availability + "Z"
-              ).toISOString(), // Force UTC
+              availability: examResponse.data[0].availability, // Keep as string
               subject: examResponse.data[0].subject,
             });
           }
@@ -85,6 +83,12 @@ export default function ExamList({
           }
         );
 
+        // Manually extract and format the date (MM/DD/YYYY)
+        const formattedDate = (() => {
+          const [year, month, day] = exam.availability.split("T")[0].split("-");
+          return `${month}/${day}/${year}`;
+        })();
+
         return (
           <div key={exam.exam_id}>
             {isAvailable ? (
@@ -99,12 +103,7 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date:{" "}
-                      {new Date(
-                        new Date(availabilityTime).setDate(
-                          new Date(availabilityTime).getDate() - 1
-                        )
-                      ).toLocaleDateString("en-US")}
+                      Date: {formattedDate}
                     </p>
                   </div>
                   <div>
@@ -128,8 +127,7 @@ export default function ExamList({
                     {exam.subject}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 mt-1">
-                    Date:{" "}
-                    {new Date(exam.availability).toLocaleDateString("en-US")}
+                    Date: {formattedDate}
                   </p>
                 </div>
                 <div>
