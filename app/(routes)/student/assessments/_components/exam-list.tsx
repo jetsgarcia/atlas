@@ -76,7 +76,7 @@ export default function ExamList({
 
         // Convert UTC availability to user's local time
         const formattedTime = new Date(exam.availability).toLocaleTimeString(
-          "en-US",
+          "en-PH",
           {
             hour: "2-digit",
             minute: "2-digit",
