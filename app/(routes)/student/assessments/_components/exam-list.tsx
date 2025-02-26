@@ -67,15 +67,16 @@ export default function ExamList({
   return (
     <div className="grid gap-2">
       {exams.map((exam) => {
-        const availabilityTime = new Date(exam.availability).getTime();
+        const availabilityTime =
+          new Date(exam.availability).getTime() - 8 * 60 * 60 * 1000;
         const currentTime = new Date().getTime();
         const endTime = availabilityTime + exam.duration * 60 * 60 * 1000;
 
         const isAvailable =
           availabilityTime < currentTime && endTime > currentTime;
 
-        // Convert UTC availability to user's local time
-        const formattedTime = new Date(exam.availability).toLocaleTimeString(
+        // Convert UTC availability to user's local time (Adjusted for Manila time)
+        const formattedTime = new Date(availabilityTime).toLocaleTimeString(
           "en-PH",
           {
             hour: "2-digit",
@@ -98,7 +99,8 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date: {new Date(exam.availability).toLocaleDateString()}
+                      Date:{" "}
+                      {new Date(availabilityTime).toLocaleDateString("en-PH")}
                     </p>
                   </div>
                   <div>
