@@ -100,7 +100,11 @@ export default function ExamList({
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
                       Date:{" "}
-                      {new Date(availabilityTime).toLocaleDateString("en-US")}
+                      {new Date(
+                        new Date(availabilityTime).setDate(
+                          new Date(availabilityTime).getDate() - 1
+                        )
+                      ).toLocaleDateString("en-US")}
                     </p>
                   </div>
                   <div>
