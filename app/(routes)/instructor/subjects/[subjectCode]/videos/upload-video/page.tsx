@@ -18,7 +18,9 @@ export default function ManageVideosPage({
   const [loading, setLoading] = useState(false);
 
   return loading ? (
-    <Loader />
+    <div className="h-[calc(100vh-9rem)]">
+      <Loader />
+    </div>
   ) : (
     <form
       onSubmit={async (e) => {

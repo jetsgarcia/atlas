@@ -47,7 +47,9 @@ export default function WatchVideoPage({
   return (
     <div>
       {isLoading ? (
-        <Loader />
+        <div className="h-[calc(100vh-5.8rem)">
+          <Loader />
+        </div>
       ) : (
         <div className="flex gap-4">
           <div className="grid gap-4 w-3/4">
