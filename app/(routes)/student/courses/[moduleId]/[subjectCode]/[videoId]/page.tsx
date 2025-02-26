@@ -47,7 +47,7 @@ export default function WatchVideoPage({
   return (
     <div>
       {isLoading ? (
-        <div className="h-[calc(100vh-5.8rem)">
+        <div className="h-[calc(100vh-5.8rem)]">
           <Loader />
         </div>
       ) : (
