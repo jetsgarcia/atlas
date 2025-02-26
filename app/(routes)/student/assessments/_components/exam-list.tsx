@@ -98,7 +98,10 @@ export default function ExamList({
                       {exam.subject}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mt-1">
-                      Date: {exam.availability.toLocaleDateString("en-PH")}
+                      Date:{" "}
+                      {exam.availability.toLocaleDateString("en-PH", {
+                        timeZone: "Asia/Manila",
+                      })}
                     </p>
                   </div>
                   <div>
