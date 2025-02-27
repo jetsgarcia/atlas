@@ -61,13 +61,13 @@ export default function ManageSubjectsPage({
         return (
           <div
             key={subject.subject_code}
-            className="border rounded-lg overflow-hidden"
+            className="border rounded-lg overflow-hidden transition-all hover:bg-gray-100 hover:shadow-md active:opacity-80"
           >
             <Link
               href={`/student/courses/${params.moduleId}/${subject.subject_code}`}
-              className="flex "
+              className="flex items-center"
             >
-              <div className="w-6 h-24 bg-darkGreen-400"> </div>
+              <div className="w-6 h-24 bg-darkGreen-400"></div>
               <div className="flex p-4 my-4 items-center gap-6">
                 <div className="text-lg font-semibold">
                   {subject.subject_code}

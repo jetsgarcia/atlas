@@ -55,13 +55,13 @@ export default function SubjectsList({
         return (
           <div
             key={module.module_id}
-            className="border rounded-lg overflow-hidden"
+            className="border rounded-lg overflow-hidden transition-all hover:bg-gray-100 hover:shadow-md active:opacity-80"
           >
             <Link
               href={`/student/courses/${module.module_id}`}
-              className="flex "
+              className="flex items-center"
             >
-              <div className="w-6 h-24 bg-darkGreen-400"> </div>
+              <div className="w-6 h-24 bg-darkGreen-400"></div>
               <div className="flex p-4 my-4 items-center gap-6">
                 <div className="text-lg font-semibold">
                   Module {module.module_number}
