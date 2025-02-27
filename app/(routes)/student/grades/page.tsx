@@ -1,4 +1,4 @@
-import GradeList from "@/app/_features/student/grades/components/grade-list";
+import GradeList from "./_components/grades-list";
 import { cookies } from "next/headers";
 
 export default async function GradesPage() {
