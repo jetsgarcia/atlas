@@ -10,7 +10,7 @@ export default function SubmitButton({ subjectCode }: { subjectCode: string }) {
     <Button
       type="submit"
       onClick={() => {
-        router.push(`/instructor/subjects/${subjectCode}`);
+        router.push(`/instructor/subjects/${subjectCode}/videos`);
       }}
     >
       Upload
