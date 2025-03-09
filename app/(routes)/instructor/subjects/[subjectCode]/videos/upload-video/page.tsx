@@ -1,7 +1,6 @@
 "use client";
 
 import { upload } from "./_actions/upload";
-import SubmitButton from "./_components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +8,7 @@ import { useState } from "react";
 import Loader from "@/components/loader";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function ManageVideosPage({
   params,
@@ -58,7 +58,7 @@ export default function ManageVideosPage({
           className="h-52"
         />
       </div>
-      <SubmitButton subjectCode={params.subjectCode} />
+      <Button type="submit">Upload</Button>
     </form>
   );
 }
